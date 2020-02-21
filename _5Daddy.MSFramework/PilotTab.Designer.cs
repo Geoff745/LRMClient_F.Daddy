@@ -110,7 +110,7 @@
             // page
             // 
             this.page.BackColor = System.Drawing.SystemColors.Control;
-            this.page.Location = new System.Drawing.Point(-4, 95);
+            this.page.Location = new System.Drawing.Point(-3, 95);
             this.page.Name = "page";
             this.page.Size = new System.Drawing.Size(1062, 356);
             this.page.TabIndex = 7;
