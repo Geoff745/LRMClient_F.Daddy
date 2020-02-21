@@ -39,7 +39,7 @@ namespace _5Daddy.MSFramework
             try
             {
                 var flightsim = FSUIPCReader.ConnectToFlightSim();
-                FSUIPCReader.StartReading();
+                //FSUIPCReader.StartReading();
                 if (FSUIPCReader.isConnected)
                 {
                     label2.Text = "Connected To: " + flightsim;
@@ -54,9 +54,11 @@ namespace _5Daddy.MSFramework
         }
         bool RptGround = false;
         private delegate void SafeCallDelegate();
+        int i = 0;
         private void UpdateForm(object sender, EventArgs e)
         {
             FSUIPCConnection.Process();
+            FPMBox.Text = i++.ToString();
             var OnGround = onGround.Value > 0 ? true : false;
             if (!OnGround && !RptGround)
             {
@@ -64,11 +66,6 @@ namespace _5Daddy.MSFramework
                 double verticalSpeedMPS = verticalSpeed.Value / 256d;
                 double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
                 var VerticalSpeed = (int)verticalSpeedFPM;
-                WeatherServices ws = FSUIPCConnection.WeatherServices;
-                FsWeather weather = ws.GetWeatherAtAircraft();
-                FsWindLayer windLayer = weather.WindLayers[0];
-                var WindSpeed = (int)windLayer.SpeedKnots;
-                var WindHeading = (int)windLayer.Direction;
                 var Bank = (int)((double)roll.Value * 360 / 4294967296);
                 var Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
                 string pitchS = "";
@@ -88,12 +85,19 @@ namespace _5Daddy.MSFramework
                 this.FPMBox.Text = VerticalSpeed.ToString();
                 this.PitchBox.Text = pitchS;
                 this.BankBox.Text = bankS;
-                this.WindSpeedBox.Text = WindSpeed.ToString();
-                this.WindHeadingBox.Text = WindHeading.ToString();
                 this.SpeedBox.Text = Airspeed.ToString();
             }
             if (OnGround && !RptGround)
             {
+                WeatherServices ws = FSUIPCConnection.WeatherServices;
+                FsWeather weather = ws.GetWeatherAtAircraft();
+                FsWindLayer windLayer = weather.WindLayers[0];
+                var WindSpeed = (int)windLayer.SpeedKnots;
+                var WindHeading = (int)windLayer.Direction;
+                this.WindSpeedBox.Text = WindSpeed.ToString();
+                this.WindHeadingBox.Text = WindHeading.ToString();
+
+
                 //new landing
                 int fpm = Convert.ToInt32(this.FPMBox.Text);
                 if (fpm <= -1500)
@@ -151,11 +155,12 @@ namespace _5Daddy.MSFramework
                 };
                 tempTimer.Start();
             }
+            GC.Collect();
         }
         private void button2_Click(object sender, EventArgs e)
         {
             FSUIPCReader.CloseConnection();
-            FSUIPCReader.StopReading();
+            //FSUIPCReader.StopReading();
             if (!FSUIPCReader.isConnected)
             {
                 label2.Text = "Connected To: None";

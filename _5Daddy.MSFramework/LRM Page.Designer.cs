@@ -170,7 +170,7 @@
             //
             //timer
             //
-            this.OffsetReaderTimer.Tick += UpdateForm;
+            this.OffsetReaderTimer.Tick += new System.EventHandler(this.UpdateForm);
             // 
             // ScoreBox
             // 
