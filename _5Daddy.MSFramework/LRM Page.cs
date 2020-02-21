@@ -18,7 +18,6 @@ namespace _5Daddy.MSFramework
         {
             InitializeComponent();
         }
-        System.Windows.Forms.Timer timer1;
         private static Offset<uint> airspeed = new Offset<uint>(0x02BC);             // 4-byte offset - Unsigned integer 
         private static Offset<int> verticalSpeed = new Offset<int>(0x02C8);          // 4-byte offset - Signed integer 
         private Offset<ushort> onGround = new Offset<ushort>(0x0366);
@@ -32,10 +31,7 @@ namespace _5Daddy.MSFramework
 
         private void LRM_Page_Load(object sender, EventArgs e)
         {
-            timer1 = this.OffsetReaderTimer;
-            //OffsetReadTimer.Elapsed += UpdateForm;
-            timer1.Interval = Global.OffsetRefreshRate;
-            timer1.Tick += UpdateForm;
+            OffsetReaderTimer.Interval = Global.OffsetRefreshRate;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,7 +44,7 @@ namespace _5Daddy.MSFramework
                 {
                     label2.Text = "Connected To: " + flightsim;
                     label2.ForeColor = Color.Green;
-                    timer1.Enabled = true;
+                    OffsetReaderTimer.Enabled = true;
                 }
             }
             catch(Exception ex)
@@ -164,7 +160,7 @@ namespace _5Daddy.MSFramework
             {
                 label2.Text = "Connected To: None";
                 label2.ForeColor = Color.Red;
-                timer1.Enabled = false;
+                OffsetReaderTimer.Enabled = false;
             }
         }
 
