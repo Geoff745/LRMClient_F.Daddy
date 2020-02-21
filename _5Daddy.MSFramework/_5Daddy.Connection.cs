@@ -19,7 +19,28 @@ namespace _5Daddy.MSFramework
             public string Header { get; set; }
             public Dictionary<object, object> Body { get; set; }
             public string Auth { get; set; }
+
             public string Version { get; set; }
+        }
+        internal class ValidateResponcePacket : IPacket
+        {
+            public string Header { get; set; }
+            public Dictionary<object, object> Body { get; set; }
+            public string Auth { get; set; }
+
+            public string AuthToken { get; set; }
+            public string DiscordUsername { get; set; }
+            public ulong DiscordID { get; set; }
+
+            public ValidateResponcePacket(RawPacket p)
+            {
+                Header = p.Header;
+                Body = p.Body;
+                DiscordUsername = p.Body["Discord_Username"].ToString();
+                DiscordID = ulong.Parse(p.Body["Discord_ID"].ToString());
+                Auth = p.Body["Auth"].ToString();
+                AuthToken = Auth;
+            }
         }
         internal class Validate_User : IPacket
         {
@@ -61,33 +82,6 @@ namespace _5Daddy.MSFramework
             Global.RawPacket_History.Add(RawPacket);
             return RawPacket;
         }
-        public async static Task<string> RWHTTP(IPacket data, int Timeout = 5000)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(data);
-                var RequestMessage = new HttpRequestMessage()
-                {
-                    Content = new ByteArrayContent(Encoding.ASCII.GetBytes(json)),
-                    Method = new HttpMethod("POST"),
-                    RequestUri = Global.URI,
-                };
-                var ResponseMessage = Global.Communcation.SendAsync(RequestMessage).Result;
-                Console.WriteLine("POST > " + Global.URI.ToString().Replace("/", "").Remove(0, 5) + "\n    TX > "+ json);
-                Stream ReadSteam = await ResponseMessage.Content.ReadAsStreamAsync();
-                byte[] MaxBuffer = new byte[1024];
-                int ByteBuffer = ReadSteam.Read(MaxBuffer, 0, Convert.ToInt32(ReadSteam.Length));
-                byte[] DataBuffer = new byte[ByteBuffer];
-                Array.Copy(MaxBuffer, DataBuffer, ByteBuffer);
-                Console.WriteLine("POST > " + Global.URI.ToString().Replace("/", "").Remove(0, 5) + "\n    RX > " + Encoding.ASCII.GetString(DataBuffer));
-                return Encoding.ASCII.GetString(DataBuffer);
-            }
-            catch (SocketException ex)
-            {
-                throw new Exception("Could Not Send Data to Master Server!", ex);
-            }
-        }
-
         public async static Task<string> DiscordValidation()
         {
             HttpListenerContext URL_Response;

@@ -14,7 +14,6 @@ namespace _5Daddy.MSFramework
     {
         public PilotTab()
         {
-
             InitializeComponent();
             pl_lb.Text = "Hello, " + Global.Username;
         }

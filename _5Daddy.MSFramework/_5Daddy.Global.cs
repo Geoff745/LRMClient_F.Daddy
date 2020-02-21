@@ -12,9 +12,16 @@ namespace _5Daddy.MSFramework
     {
 
         public static HttpClient Communcation = new HttpClient();
+
         internal static Uri URI = new Uri("http://localhost:8081/");
+
         public static Type PacketType { get; set; }
+
         public static string AuthToken { get; set; }
+
+        public static bool OfflineMode = false;
+
+        public static bool LoggedIn = false;
 
         public static List<Connection.RawPacket> RawPacket_History = new List<Connection.RawPacket>();
 
