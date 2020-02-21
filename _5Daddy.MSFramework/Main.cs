@@ -24,6 +24,7 @@ namespace _5Daddy.MSFramework
         {
             InitializeComponent();
             Login_btn.Text = "Fetching..";
+            FSUIPCReader e = new FSUIPCReader();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -113,7 +114,12 @@ namespace _5Daddy.MSFramework
             Global.OfflineMode = true;
             PilotTab pl = new PilotTab();
             pl.Show();
-            Hide();
+            this.Hide();
+        }
+
+        private void OffsetReaderTimer_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

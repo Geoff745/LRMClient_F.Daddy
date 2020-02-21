@@ -12,35 +12,40 @@ namespace _5Daddy.MSFramework
 {
     public partial class PilotTab : MetroFramework.Forms.MetroForm
     {
+        
         public PilotTab()
         {
             InitializeComponent();
             pl_lb.Text = "Hello, " + Global.Username;
+
+            page = new LRM_Page();
+            page.Hide();
+            page.Location = new Point(-1, 95);
         }
 
         private void PilotTab_Load(object sender, EventArgs e)
         {
-
+            page.Hide();
         }
 
         private void metroTile4_Click(object sender, EventArgs e)
         {
-
+            page.Hide();
         }
 
         private void metroTile3_Click(object sender, EventArgs e)
         {
-
+            page.Hide();
         }
 
         private void metroTile2_Click(object sender, EventArgs e)
         {
-
+            page.Hide();
         }
 
         private void metroTile1_Click(object sender, EventArgs e)
         {
-
+            page.Show();
         }
     }
 }

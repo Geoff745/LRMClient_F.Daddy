@@ -23,6 +23,11 @@ namespace _5Daddy.MSFramework
 
         public static bool LoggedIn = false;
 
+        //The time after you take off to start reading offsets again
+        public static int LandingTimeoutTime = 4000;
+
+        public static int OffsetRefreshRate = 10;
+
         public static List<Connection.RawPacket> RawPacket_History = new List<Connection.RawPacket>();
 
         public static bool ServerAcesss = false;

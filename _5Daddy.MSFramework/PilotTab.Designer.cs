@@ -33,6 +33,7 @@
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile4 = new MetroFramework.Controls.MetroTile();
             this.pl_lb = new System.Windows.Forms.Label();
+            this.page = new _5Daddy.MSFramework.LRM_Page();
             this.SuspendLayout();
             // 
             // metroTile1
@@ -99,18 +100,27 @@
             // 
             this.pl_lb.AutoSize = true;
             this.pl_lb.Font = new System.Drawing.Font("Segoe UI Semilight", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pl_lb.Location = new System.Drawing.Point(34, 38);
+            this.pl_lb.Location = new System.Drawing.Point(4, 8);
             this.pl_lb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pl_lb.Name = "pl_lb";
             this.pl_lb.Size = new System.Drawing.Size(185, 74);
             this.pl_lb.TabIndex = 6;
             this.pl_lb.Text = "Hello, ";
             // 
+            // page
+            // 
+            this.page.BackColor = System.Drawing.SystemColors.Control;
+            this.page.Location = new System.Drawing.Point(-4, 95);
+            this.page.Name = "page";
+            this.page.Size = new System.Drawing.Size(1062, 356);
+            this.page.TabIndex = 7;
+            // 
             // PilotTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 566);
+            this.Controls.Add(this.page);
             this.Controls.Add(this.pl_lb);
             this.Controls.Add(this.metroTile4);
             this.Controls.Add(this.metroTile3);
@@ -135,5 +145,6 @@
         private MetroFramework.Controls.MetroTile metroTile3;
         private MetroFramework.Controls.MetroTile metroTile4;
         private System.Windows.Forms.Label pl_lb;
+        private LRM_Page page;
     }
 }

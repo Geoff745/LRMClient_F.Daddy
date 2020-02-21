@@ -42,10 +42,11 @@ namespace _5Daddy.MSFramework
 
         public static bool isConnected = false;
 
-        private static bool RptGround = false;
-        public static event EventHandler<LandingEventArgs> Landed;
-        public static event EventHandler<CustomOffsetData> CustomOffsetRead;
+        public static bool RptGround = false;
 
+        public static event EventHandler<LandingEventArgs> Landed;
+        public static event EventHandler<CustomOffsetData[]> CustomOffsetRead;
+        public static event EventHandler OffsetDataUpdated;
         private List<CustomOffset> CustomOffsetList = new List<CustomOffset>();
 
         public class CustomOffset
@@ -70,80 +71,99 @@ namespace _5Daddy.MSFramework
 
         static Timer t = new Timer()
         {
-            Interval = 25,
+            Interval = Global.OffsetRefreshRate,
             AutoReset = true,
             Enabled = false
         };
-        FSUIPCReader()
+
+        public FSUIPCReader()
         {
             t.Elapsed += ReadOffsets;
         }
 
         private void ReadOffsets(object sender, ElapsedEventArgs e)
         {
-            if (!isConnected)
-                return;
-            FSUIPCConnection.Process();
-            Longitude = (double)longitude.Value * 360 / (1.8446744e+19);
-            Latitude = (double)latitude.Value * 90.0 / (10001750.0 * 65536.0 * 65536.0);
-            Heading = (int)Math.Round((double)heading.Value * 360 / 4294967296);
-            Airspeed = (int)Math.Round(airspeed.Value / 128d);
-            AircraftType = aircraftType.Value;
-            AircraftID = aircraftID.Value;
-            double verticalSpeedMPS = verticalSpeed.Value / 256d;
-            double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
-            VerticalSpeed = (int)verticalSpeedFPM;
-            WeatherServices ws = FSUIPCConnection.WeatherServices;
-            FsWeather weather = ws.GetWeatherAtAircraft();
-            FsWindLayer windLayer = weather.WindLayers[0];
-            WindSpeed = (int)windLayer.SpeedKnots;
-            WindHeading = (int)windLayer.Direction;
-            Bank = (int)((double)roll.Value * 360 / 4294967296);
-            Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
-            foreach(var offset in CustomOffsetList)
+            try
             {
-                Type t = offset.Type;
-                var type = typeof(Offset<>).MakeGenericType(t);
-                object a_Context = Activator.CreateInstance(type, new object[] { offset.OffestAddress });
-                var value = a_Context.GetType().GetProperty("Value");
-                CustomOffsetRead.Invoke(this, new CustomOffsetData()
+                if (!isConnected)
+                    return;
+                FSUIPCConnection.Process();
+                OnGround = onGround.Value > 0 ? true : false;
+                if (!OnGround && !RptGround)
                 {
-                    Address = offset.OffestAddress,
-                    Name = offset.Name,
-                    Type = t,
-                    Value = value
-                });
+                    Longitude = (double)longitude.Value * 360 / (1.8446744e+19);
+                    Latitude = (double)latitude.Value * 90.0 / (10001750.0 * 65536.0 * 65536.0);
+                    Heading = (int)Math.Round((double)heading.Value * 360 / 4294967296);
+                    Airspeed = (int)Math.Round(airspeed.Value / 128d);
+                    AircraftType = aircraftType.Value;
+                    AircraftID = aircraftID.Value;
+                    double verticalSpeedMPS = verticalSpeed.Value / 256d;
+                    double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
+                    VerticalSpeed = (int)verticalSpeedFPM;
+                    WeatherServices ws = FSUIPCConnection.WeatherServices;
+                    FsWeather weather = ws.GetWeatherAtAircraft();
+                    FsWindLayer windLayer = weather.WindLayers[0];
+                    WindSpeed = (int)windLayer.SpeedKnots;
+                    WindHeading = (int)windLayer.Direction;
+                    Bank = (int)((double)roll.Value * 360 / 4294967296);
+                    Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
+                    OffsetDataUpdated?.Invoke(this, null);
+                    List<CustomOffsetData> l = new List<CustomOffsetData>();
+                    foreach (var offset in CustomOffsetList)
+                    {
+                        Type t = offset.Type;
+                        var type = typeof(Offset<>).MakeGenericType(t);
+                        object a_Context = Activator.CreateInstance(type, new object[] { offset.OffestAddress });
+                        var value = a_Context.GetType().GetProperty("Value");
+                        var d = new CustomOffsetData()
+                        {
+                            Address = offset.OffestAddress,
+                            Name = offset.Name,
+                            Type = t,
+                            Value = value
+                        };
+                        l.Add(d);
+
+                        CustomOffsetRead.Invoke(this, l.ToArray());
+                    }
+                }
+
+                if (OnGround && !RptGround)
+                {
+                    //new landing
+
+                    Landed?.Invoke(this, new LandingEventArgs()
+                    {
+                        Airspeed = Airspeed,
+                        VerticalSpeed = VerticalSpeed,
+                        WindSpeed = WindSpeed,
+                        WindHeading = WindHeading,
+                        Bank = Bank,
+                        Pitch = Pitch
+                    });
+
+                    RptGround = true;
+                }
+                if (RptGround && !OnGround)
+                {
+                    Timer tempTimer = new Timer()
+                    {
+                        Interval = Global.LandingTimeoutTime,
+                        AutoReset = false
+                    };
+                    StopReading();
+                    tempTimer.Elapsed += (object s, ElapsedEventArgs el) =>
+                    {
+                        StartReading();
+                        RptGround = false;
+                    };
+                    tempTimer.Start();
+                }
             }
-
-            if (OnGround && !RptGround)
+            catch(Exception ex)
             {
-                //new landing
-
-                Landed.Invoke(this, new LandingEventArgs()
-                {
-                    Airspeed = Airspeed,
-                    VerticalSpeed = VerticalSpeed,
-                    WindSpeed = WindSpeed,
-                    WindHeading = WindHeading,
-                    Bank = Bank,
-                    Pitch = Pitch
-                });
-
-                RptGround = true;
-            }
-            if (RptGround && !OnGround)
-            {
-                Timer tempTimer = new Timer()
-                {
-                    Interval = 3000,
-                    AutoReset = false
-                };
+                CloseConnection();
                 StopReading();
-                tempTimer.Elapsed += (object s, ElapsedEventArgs el) =>
-                {
-                    StartReading();
-                    RptGround = false;
-                };
             }
         }
         public class LandingEventArgs : EventArgs
@@ -162,10 +182,10 @@ namespace _5Daddy.MSFramework
             public string Name { get; set; }
             public int Address { get; set; }
         }
-        static FlightSim ConnectToFlightSim()
+        public static FlightSim ConnectToFlightSim()
         {
             FSUIPCConnection.Open();
-            if(FSUIPCConnection.IsOpen)
+            if (FSUIPCConnection.IsOpen)
             {
                 isConnected = true;
                 return FSUIPCConnection.FlightSimVersionConnected.Simulator;
@@ -176,16 +196,16 @@ namespace _5Daddy.MSFramework
                 throw new Exception("Cannot connect to flight Sim!");
             }
         }
-        static void CloseConnection()
+        public static void CloseConnection()
         {
             FSUIPCConnection.Close();
             isConnected = false;
         }
-        static void StartReading()
+        public static void StartReading()
         {
             t.Start();
         }
-        static void StopReading()
+        public static void StopReading()
         {
             t.Stop();
         }
