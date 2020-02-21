@@ -14,6 +14,7 @@ namespace _5Daddy.MSFramework
 {
     static class Connection
     {
+
         internal class New_Client : IPacket
         {
             public string Header { get; set; }
