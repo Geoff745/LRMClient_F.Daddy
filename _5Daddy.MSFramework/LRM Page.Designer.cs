@@ -69,7 +69,7 @@
             // 
             this.SpeedBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.SpeedBox.Location = new System.Drawing.Point(125, 71);
-            this.SpeedBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SpeedBox.Margin = new System.Windows.Forms.Padding(2);
             this.SpeedBox.Name = "SpeedBox";
             this.SpeedBox.ReadOnly = true;
             this.SpeedBox.Size = new System.Drawing.Size(84, 26);
@@ -79,7 +79,7 @@
             // 
             this.BankBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.BankBox.Location = new System.Drawing.Point(125, 39);
-            this.BankBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BankBox.Margin = new System.Windows.Forms.Padding(2);
             this.BankBox.Name = "BankBox";
             this.BankBox.ReadOnly = true;
             this.BankBox.Size = new System.Drawing.Size(84, 26);
@@ -89,7 +89,7 @@
             // 
             this.PitchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.PitchBox.Location = new System.Drawing.Point(125, 6);
-            this.PitchBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PitchBox.Margin = new System.Windows.Forms.Padding(2);
             this.PitchBox.Name = "PitchBox";
             this.PitchBox.ReadOnly = true;
             this.PitchBox.Size = new System.Drawing.Size(84, 26);
@@ -121,7 +121,7 @@
             // 
             this.WindSpeedBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.WindSpeedBox.Location = new System.Drawing.Point(125, 106);
-            this.WindSpeedBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WindSpeedBox.Margin = new System.Windows.Forms.Padding(2);
             this.WindSpeedBox.Name = "WindSpeedBox";
             this.WindSpeedBox.ReadOnly = true;
             this.WindSpeedBox.Size = new System.Drawing.Size(84, 26);
@@ -131,7 +131,7 @@
             // 
             this.WindHeadingBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.WindHeadingBox.Location = new System.Drawing.Point(125, 139);
-            this.WindHeadingBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WindHeadingBox.Margin = new System.Windows.Forms.Padding(2);
             this.WindHeadingBox.Name = "WindHeadingBox";
             this.WindHeadingBox.ReadOnly = true;
             this.WindHeadingBox.Size = new System.Drawing.Size(84, 26);
@@ -163,7 +163,7 @@
             // 
             this.FPMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.FPMBox.Location = new System.Drawing.Point(344, 6);
-            this.FPMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FPMBox.Margin = new System.Windows.Forms.Padding(2);
             this.FPMBox.Name = "FPMBox";
             this.FPMBox.ReadOnly = true;
             this.FPMBox.Size = new System.Drawing.Size(127, 45);
@@ -179,16 +179,12 @@
             this.FPMLabel.Size = new System.Drawing.Size(92, 39);
             this.FPMLabel.TabIndex = 13;
             this.FPMLabel.Text = "FPM";
-            //
-            //timer
-            //
-            this.OffsetReaderTimer.Tick += UpdateForm;
             // 
             // ScoreBox
             // 
             this.ScoreBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.ScoreBox.Location = new System.Drawing.Point(344, 51);
-            this.ScoreBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ScoreBox.Margin = new System.Windows.Forms.Padding(2);
             this.ScoreBox.Name = "ScoreBox";
             this.ScoreBox.ReadOnly = true;
             this.ScoreBox.Size = new System.Drawing.Size(109, 26);
@@ -223,7 +219,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(2, 167);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 37);
             this.button1.TabIndex = 19;
@@ -237,7 +233,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Location = new System.Drawing.Point(99, 167);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 37);
             this.button2.TabIndex = 20;
@@ -300,6 +296,10 @@
             this.label6.Text = "°";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
+            // OffsetReaderTimer
+            // 
+            this.OffsetReaderTimer.Interval = 10;
+            // 
             // LRM_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,7 +327,7 @@
             this.Controls.Add(this.BankBox);
             this.Controls.Add(this.SpeedBox);
             this.Controls.Add(this.PitchLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LRM_Page";
             this.Size = new System.Drawing.Size(708, 231);
             this.Load += new System.EventHandler(this.LRM_Page_Load);

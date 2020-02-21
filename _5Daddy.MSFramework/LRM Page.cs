@@ -53,25 +53,31 @@ namespace _5Daddy.MSFramework
             }
         }
         bool RptGround = false;
-        private delegate void SafeCallDelegate();
         private void UpdateForm(object sender, EventArgs e)
         {
+            Console.WriteLine("1");
             FSUIPCConnection.Process();
+            Console.WriteLine("2");
             var OnGround = onGround.Value > 0 ? true : false;
+            Console.WriteLine("3");
             if (!OnGround && !RptGround)
             {
+                Console.WriteLine("4");
                 var Airspeed = (int)Math.Round(airspeed.Value / 128d);
+                Console.WriteLine("5");
                 double verticalSpeedMPS = verticalSpeed.Value / 256d;
+                Console.WriteLine("6");
                 double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
                 var VerticalSpeed = (int)verticalSpeedFPM;
+                Console.WriteLine("7");
                 WeatherServices ws = FSUIPCConnection.WeatherServices;
-                FsWeather weather = ws.GetWeatherAtAircraft();
-                FsWindLayer windLayer = weather.WindLayers[0];
-                var WindSpeed = (int)windLayer.SpeedKnots;
-                var WindHeading = (int)windLayer.Direction;
+                Console.WriteLine("12");
                 var Bank = (int)((double)roll.Value * 360 / 4294967296);
+                Console.WriteLine("13");
                 var Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
+                Console.WriteLine("14");
                 string pitchS = "";
+                Console.WriteLine("15");
                 if (Pitch >= 0)
                     pitchS = Pitch.ToString() + "▲";
                 else
@@ -84,13 +90,15 @@ namespace _5Daddy.MSFramework
                     else
                         bankS = (Bank * -1) + "R";
                 }
-
+                Console.WriteLine("16");
                 this.FPMBox.Text = VerticalSpeed.ToString();
+                Console.WriteLine("17");
                 this.PitchBox.Text = pitchS;
+                Console.WriteLine("18");
                 this.BankBox.Text = bankS;
-                this.WindSpeedBox.Text = WindSpeed.ToString();
-                this.WindHeadingBox.Text = WindHeading.ToString();
+                Console.WriteLine("21");
                 this.SpeedBox.Text = Airspeed.ToString();
+                Console.WriteLine("22");
             }
             if (OnGround && !RptGround)
             {
