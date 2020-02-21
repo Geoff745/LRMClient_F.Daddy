@@ -167,6 +167,10 @@
             this.FPMLabel.Size = new System.Drawing.Size(134, 58);
             this.FPMLabel.TabIndex = 13;
             this.FPMLabel.Text = "FPM";
+            //
+            //timer
+            //
+            this.OffsetReaderTimer.Tick += UpdateForm;
             // 
             // ScoreBox
             // 
