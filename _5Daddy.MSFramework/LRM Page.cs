@@ -54,11 +54,9 @@ namespace _5Daddy.MSFramework
         }
         bool RptGround = false;
         private delegate void SafeCallDelegate();
-        int i = 0;
         private void UpdateForm(object sender, EventArgs e)
         {
             FSUIPCConnection.Process();
-            FPMBox.Text = i++.ToString();
             var OnGround = onGround.Value > 0 ? true : false;
             if (!OnGround && !RptGround)
             {
@@ -73,7 +71,7 @@ namespace _5Daddy.MSFramework
                     pitchS = Pitch.ToString() + "▲";
                 else
                     pitchS = Pitch.ToString() + "▼";
-                string bankS = "";
+                string bankS = "0";
                 if (Bank != 0)
                 {
                     if (Bank > 0)
@@ -81,7 +79,7 @@ namespace _5Daddy.MSFramework
                     else
                         bankS = (Bank * -1) + "R";
                 }
-
+                
                 this.FPMBox.Text = VerticalSpeed.ToString();
                 this.PitchBox.Text = pitchS;
                 this.BankBox.Text = bankS;
@@ -99,47 +97,22 @@ namespace _5Daddy.MSFramework
 
 
                 //new landing
-                int fpm = Convert.ToInt32(this.FPMBox.Text);
-                if (fpm <= -1500)
-                {
-                    ScoreBox.Text = "DEAD!";
-                    return;
-                }
-                if (fpm <= -700)
-                {
-                    ScoreBox.Text = "1/10!";
-                    return;
-                }
-                if (fpm <= -500)
-                {
-                    ScoreBox.Text = "Need repair!";
-                    return;
-                }
-                if (fpm <= -300)
-                {
-                    ScoreBox.Text = "Ouch!";
-                    return;
-                }
-                if (fpm <= -200)
-                {
-                    ScoreBox.Text = "Harsh!";
-                    return;
-                }
-                if (fpm <= -175)
-                {
-                    ScoreBox.Text = "Nice!";
-                    return;
-                }
-                if (fpm <= -100)
-                {
-                    ScoreBox.Text = "Smooth!";
-                    return;
-                }
-                if (fpm <= -50)
-                {
-                    ScoreBox.Text = "Butter!";
-                    return;
-                }
+                if (FPMBox.Text == "")
+                    FPMBox.Text = "0";
+                UpdateScore();
+
+                LandingStats ls = new LandingStats();
+                ls.Date = $"{DateTime.Now.Day}_{DateTime.Now.Month}_{DateTime.Now.Year} {DateTime.Now.ToShortTimeString()}";
+                ls.FPM = FPMBox.Text;
+                ls.Speed = SpeedBox.Text;
+                ls.Score = ScoreBox.Text;
+                ls.Roll = BankBox.Text;
+                ls.Pitch = PitchLabel.Text.Replace("Pitch: ", "");
+                ls.WindSpeed = WindSpeedBox.Text;
+                ls.WindDirection = WindHeadingBox.Text;
+
+                LandingDatabase.AddStat(ls);
+
                 RptGround = true;
             }
             if (RptGround && !OnGround)
@@ -156,6 +129,50 @@ namespace _5Daddy.MSFramework
                 tempTimer.Start();
             }
             GC.Collect();
+        }
+        private void UpdateScore()
+        {
+            int fpm = Convert.ToInt32(this.FPMBox.Text);
+            if (fpm <= -1500)
+            {
+                ScoreBox.Text = "DEAD!";
+                return;
+            }
+            if (fpm <= -700)
+            {
+                ScoreBox.Text = "1/10!";
+                return;
+            }
+            if (fpm <= -500)
+            {
+                ScoreBox.Text = "Need repair!";
+                return;
+            }
+            if (fpm <= -300)
+            {
+                ScoreBox.Text = "Ouch!";
+                return;
+            }
+            if (fpm <= -200)
+            {
+                ScoreBox.Text = "Harsh!";
+                return;
+            }
+            if (fpm <= -175)
+            {
+                ScoreBox.Text = "Nice!";
+                return;
+            }
+            if (fpm <= -100)
+            {
+                ScoreBox.Text = "Smooth!";
+                return;
+            }
+            if (fpm <= -50)
+            {
+                ScoreBox.Text = "Butter!";
+                return;
+            }
         }
         private void button2_Click(object sender, EventArgs e)
         {
