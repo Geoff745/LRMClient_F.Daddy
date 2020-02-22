@@ -39,7 +39,7 @@ namespace _5Daddy.MSFramework
             try
             {
                 var flightsim = FSUIPCReader.ConnectToFlightSim();
-                //FSUIPCReader.StartReading();
+                //FSUIPCReader.StartReading(); e
                 if (FSUIPCReader.isConnected)
                 {
                     label2.Text = "Connected To: " + flightsim;
