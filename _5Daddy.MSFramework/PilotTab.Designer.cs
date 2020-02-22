@@ -118,7 +118,7 @@
             // lrM_Page2
             // 
             this.lrM_Page2.BackColor = System.Drawing.Color.White;
-            this.lrM_Page2.Location = new System.Drawing.Point(-1, 17);
+            this.lrM_Page2.Location = new System.Drawing.Point(-1, 21);
             this.lrM_Page2.Margin = new System.Windows.Forms.Padding(2);
             this.lrM_Page2.Name = "lrM_Page2";
             this.lrM_Page2.Size = new System.Drawing.Size(708, 271);
