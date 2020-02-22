@@ -34,7 +34,7 @@
             this.metroTile4 = new MetroFramework.Controls.MetroTile();
             this.landingDatabase1 = new _5Daddy.MSFramework.LandingDatabase();
             this.page = new _5Daddy.MSFramework.LRM_Page();
-            this.lrM_Page1 = new _5Daddy.MSFramework.LRM_Page();
+            this.lrM_Page2 = new _5Daddy.MSFramework.LRM_Page();
             this.SuspendLayout();
             // 
             // metroTile1
@@ -100,7 +100,7 @@
             // landingDatabase1
             // 
             this.landingDatabase1.BackColor = System.Drawing.Color.White;
-            this.landingDatabase1.Location = new System.Drawing.Point(-1, 42);
+            this.landingDatabase1.Location = new System.Drawing.Point(-1, 39);
             this.landingDatabase1.Margin = new System.Windows.Forms.Padding(2);
             this.landingDatabase1.Name = "landingDatabase1";
             this.landingDatabase1.Size = new System.Drawing.Size(708, 231);
@@ -115,21 +115,21 @@
             this.page.Size = new System.Drawing.Size(708, 237);
             this.page.TabIndex = 6;
             // 
-            // lrM_Page1
+            // lrM_Page2
             // 
-            this.lrM_Page1.BackColor = System.Drawing.Color.White;
-            this.lrM_Page1.Location = new System.Drawing.Point(-1, 42);
-            this.lrM_Page1.Margin = new System.Windows.Forms.Padding(2);
-            this.lrM_Page1.Name = "lrM_Page1";
-            this.lrM_Page1.Size = new System.Drawing.Size(708, 218);
-            this.lrM_Page1.TabIndex = 7;
+            this.lrM_Page2.BackColor = System.Drawing.Color.White;
+            this.lrM_Page2.Location = new System.Drawing.Point(-1, 17);
+            this.lrM_Page2.Margin = new System.Windows.Forms.Padding(2);
+            this.lrM_Page2.Name = "lrM_Page2";
+            this.lrM_Page2.Size = new System.Drawing.Size(708, 271);
+            this.lrM_Page2.TabIndex = 7;
             // 
             // PilotTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 368);
-            this.Controls.Add(this.lrM_Page1);
+            this.Controls.Add(this.lrM_Page2);
             this.Controls.Add(this.metroTile4);
             this.Controls.Add(this.metroTile3);
             this.Controls.Add(this.metroTile2);
@@ -153,5 +153,6 @@
         private LRM_Page page;
         private LandingDatabase landingDatabase1;
         private LRM_Page lrM_Page1;
+        private LRM_Page lrM_Page2;
     }
 }

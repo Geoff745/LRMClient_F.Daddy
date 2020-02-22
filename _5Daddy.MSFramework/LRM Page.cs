@@ -35,7 +35,6 @@ namespace _5Daddy.MSFramework
             //ConnectionTimer.Start();
             button1.BackColor = Color.FromArgb(255, 157, 0);
             button1.Text = "Searching... ";
-            ConnectionTimer.Start();
         }
         bool RptGround = false;
         private delegate void SafeCallDelegate();

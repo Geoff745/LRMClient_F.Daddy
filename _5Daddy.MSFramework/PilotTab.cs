@@ -25,7 +25,8 @@ namespace _5Daddy.MSFramework
             landingDatabase1.Hide();
         }
 
-        private void metroTile4_Click(object sender, EventArgs e)
+        private void metroTile4_Click(object sender, EventArgs
+            e)
         {
             page.Hide();
             landingDatabase1.Hide();
