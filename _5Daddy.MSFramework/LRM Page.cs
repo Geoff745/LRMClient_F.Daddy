@@ -32,16 +32,17 @@ namespace _5Daddy.MSFramework
         private void LRM_Page_Load(object sender, EventArgs e)
         {
             OffsetReaderTimer.Interval = Global.OffsetRefreshRate;
+            //ConnectionTimer.Start();
+            button1.BackColor = Color.FromArgb(255, 157, 0);
+            button1.Text = "Searching... ";
             ConnectionTimer.Start();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
         bool RptGround = false;
         private delegate void SafeCallDelegate();
         int i = 0;
+        bool Taken = false;
+        bool EndofRoute = false;
+        public static List<double[]> AltLS = new List<double[]>();
         private void UpdateForm(object sender, EventArgs e)
         {
             FSUIPCConnection.Process();
@@ -53,7 +54,7 @@ namespace _5Daddy.MSFramework
                     EndofRoute = true;
                 }
             }
-            else if(Taken == false)
+            else if (Taken == false)
             {
                 Taken = true;
             }
@@ -75,7 +76,7 @@ namespace _5Daddy.MSFramework
                 if (Pitch >= 0)
                     pitchS = Pitch.ToString();
                 else
-                    pitchS = Pitch.ToString() + "▼";
+                    pitchS = Pitch.ToString();
                 string bankS = "";
                 if (Bank != 0)
                 {
@@ -84,11 +85,11 @@ namespace _5Daddy.MSFramework
                     else
                         bankS = (Bank * -1).ToString();
                 }
-                
+
                 this.FPMBox.Text = VerticalSpeed.ToString();
-                this.PitchBox.Text = pitchS+" °";
-                this.BankBox.Text = bankS+ " °";
-                this.SpeedBox.Text = Airspeed.ToString()+" Knots";
+                this.PitchBox.Text = pitchS + " °";
+                this.BankBox.Text = bankS + " °";
+                this.SpeedBox.Text = Airspeed.ToString() + " Knots";
             }
             if (EndofRoute && OnGround && !RptGround)
             {
@@ -97,8 +98,8 @@ namespace _5Daddy.MSFramework
                 FsWindLayer windLayer = weather.WindLayers[0];
                 var WindSpeed = (int)windLayer.SpeedKnots;
                 var WindHeading = (int)windLayer.Direction;
-                this.WindSpeedBox.Text = WindSpeed.ToString()+" Knots";
-                this.WindHeadingBox.Text = WindHeading.ToString()+ " °";
+                this.WindSpeedBox.Text = WindSpeed.ToString() + " Knots";
+                this.WindHeadingBox.Text = WindHeading.ToString() + " °";
 
 
                 //new landing
@@ -144,6 +145,7 @@ namespace _5Daddy.MSFramework
                     return;
                 }
                 RptGround = true;
+
             }
             if (RptGround && !OnGround)
             {
@@ -178,6 +180,9 @@ namespace _5Daddy.MSFramework
 
         private void ConnectionTimer_Tick(object sender, EventArgs e)
         {
+            button1.BackColor = Color.FromArgb(255, 157, 0);
+            button1.Text = "Searching... ";
+            ConnectionTimer.Start();
             try
             {
                 var flightsim = FSUIPCReader.ConnectToFlightSim();
@@ -193,14 +198,32 @@ namespace _5Daddy.MSFramework
                 if (ex.FSUIPCErrorCode == FSUIPCError.FSUIPC_ERR_OPEN)
                 {
                     OffsetReaderTimer.Enabled = true;
+                    button1.BackColor = Color.FromArgb(235, 14, 14);
+                    button1.Text = "Disconnect";
                     ConnectionTimer.Stop();
                 }
                 else if (ConnectionError)
                 {
-                    
+
                     MetroFramework.MetroMessageBox.Show(this, "Cannot connect to flightsim!\nMake sure you have your flightsim running and have FSUIPC installed!", "Uh Oh!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 ConnectionError = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (button1.Text == "Disconnect")
+            {
+                button1.BackColor = Color.FromArgb(0, 177, 89);
+                button1.Text = "Connect";
+                OffsetReaderTimer.Stop();
+            }
+            else
+            {
+                button1.BackColor = Color.FromArgb(255, 157, 0);
+                button1.Text = "Searching... ";
+                ConnectionTimer.Start();
             }
         }
     }

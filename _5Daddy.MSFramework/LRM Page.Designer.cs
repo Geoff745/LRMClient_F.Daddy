@@ -46,6 +46,7 @@
             this.WindHeadingBox = new System.Windows.Forms.Label();
             this.ConnectionTimer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PitchLabel
@@ -203,11 +204,28 @@
             // 
             this.ConnectionTimer.Tick += new System.EventHandler(this.ConnectionTimer_Tick);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(157)))), ((int)(((byte)(0)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 15F);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(18, 202);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(209, 56);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "Searching... ";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LRM_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.WindHeadingBox);
             this.Controls.Add(this.WindSpeedBox);
             this.Controls.Add(this.SpeedBox);
@@ -224,7 +242,7 @@
             this.Controls.Add(this.PitchLabel);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LRM_Page";
-            this.Size = new System.Drawing.Size(708, 218);
+            this.Size = new System.Drawing.Size(708, 271);
             this.Load += new System.EventHandler(this.LRM_Page_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -250,5 +268,6 @@
         private System.Windows.Forms.Label WindHeadingBox;
         private System.Windows.Forms.Timer ConnectionTimer;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
     }
 }

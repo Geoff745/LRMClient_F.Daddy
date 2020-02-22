@@ -12,15 +12,11 @@ namespace _5Daddy.MSFramework
 {
     public partial class PilotTab : MetroFramework.Forms.MetroForm
     {
-        
+
         public PilotTab()
         {
             InitializeComponent();
-            pl_lb.Text = "Hello, " + Global.Username;
-
-            page = new LRM_Page();
-            page.Hide();
-            page.Location = new Point(-1, 95);
+            //pl_lb.Text = "Hello, " + Global.Username;
         }
 
         private void PilotTab_Load(object sender, EventArgs e)
