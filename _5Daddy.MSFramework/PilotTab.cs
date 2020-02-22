@@ -16,7 +16,6 @@ namespace _5Daddy.MSFramework
         public PilotTab()
         {
             InitializeComponent();
-            pl_lb.Text = "Hello, " + Global.Username;
 
             page = new LRM_Page();
             page.Hide();

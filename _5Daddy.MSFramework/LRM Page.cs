@@ -27,41 +27,47 @@ namespace _5Daddy.MSFramework
         private Offset<string> aircraftType = new Offset<string>(0x3D00, 256);
         private Offset<string> aircraftID = new Offset<string>(0x313C, 12);
         private Offset<int> roll = new Offset<int>(0x057C);
-
+        private Offset<long> Alt = new Offset<long>(0x0574);
 
         private void LRM_Page_Load(object sender, EventArgs e)
         {
             OffsetReaderTimer.Interval = Global.OffsetRefreshRate;
+            ConnectionTimer.Start();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var flightsim = FSUIPCReader.ConnectToFlightSim();
-                //FSUIPCReader.StartReading();
-                if (FSUIPCReader.isConnected)
-                {
-                    label2.Text = "Connected To: " + flightsim;
-                    label2.ForeColor = Color.Green;
-                    OffsetReaderTimer.Enabled = true;
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Cannot connect to flightsim!\nMake sure you have your flightsim running and have FSUIPC installed!", "Uh Oh!", MessageBoxButtons.OK);
-            }
+
         }
         bool RptGround = false;
         private delegate void SafeCallDelegate();
         int i = 0;
+        bool Taken = false;
+        bool EndofRoute = false;
+        public static List<double[]> AltLS = new List<double[]>();
         private void UpdateForm(object sender, EventArgs e)
         {
             FSUIPCConnection.Process();
-            FPMBox.Text = i++.ToString();
             var OnGround = onGround.Value > 0 ? true : false;
+            if (OnGround)
+            {
+                if (Taken)
+                {
+                    EndofRoute = true;
+                }
+            }
+            else if(Taken == false)
+            {
+                Taken = true;
+            }
+            else if (EndofRoute && OnGround == false)
+            {
+                EndofRoute = true;
+            }
             if (!OnGround && !RptGround)
             {
+
+                AltLS.Add(new double[] { Alt.Value * 3.2808399 });
                 var Airspeed = (int)Math.Round(airspeed.Value / 128d);
                 double verticalSpeedMPS = verticalSpeed.Value / 256d;
                 double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
@@ -70,32 +76,32 @@ namespace _5Daddy.MSFramework
                 var Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
                 string pitchS = "";
                 if (Pitch >= 0)
-                    pitchS = Pitch.ToString() + "▲";
+                    pitchS = Pitch.ToString();
                 else
-                    pitchS = Pitch.ToString() + "▼";
+                    pitchS = Pitch.ToString();
                 string bankS = "";
                 if (Bank != 0)
                 {
                     if (Bank > 0)
-                        bankS = Bank + "L";
+                        bankS = Bank.ToString();
                     else
-                        bankS = (Bank * -1) + "R";
+                        bankS = (Bank * -1).ToString();
                 }
 
                 this.FPMBox.Text = VerticalSpeed.ToString();
-                this.PitchBox.Text = pitchS;
-                this.BankBox.Text = bankS;
-                this.SpeedBox.Text = Airspeed.ToString();
+                this.PitchBox.Text = pitchS+" °";
+                this.BankBox.Text = bankS+ " °";
+                this.SpeedBox.Text = Airspeed.ToString()+" Knots";
             }
-            if (OnGround && !RptGround)
+            if (EndofRoute && OnGround && !RptGround)
             {
                 WeatherServices ws = FSUIPCConnection.WeatherServices;
                 FsWeather weather = ws.GetWeatherAtAircraft();
                 FsWindLayer windLayer = weather.WindLayers[0];
                 var WindSpeed = (int)windLayer.SpeedKnots;
                 var WindHeading = (int)windLayer.Direction;
-                this.WindSpeedBox.Text = WindSpeed.ToString();
-                this.WindHeadingBox.Text = WindHeading.ToString();
+                this.WindSpeedBox.Text = WindSpeed.ToString()+" Knots";
+                this.WindHeadingBox.Text = WindHeading.ToString()+ " °";
 
 
                 //new landing
@@ -141,6 +147,7 @@ namespace _5Daddy.MSFramework
                     return;
                 }
                 RptGround = true;
+                
             }
             if (RptGround && !OnGround)
             {
@@ -159,14 +166,7 @@ namespace _5Daddy.MSFramework
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            FSUIPCReader.CloseConnection();
-            //FSUIPCReader.StopReading();
-            if (!FSUIPCReader.isConnected)
-            {
-                label2.Text = "Connected To: None";
-                label2.ForeColor = Color.Red;
-                OffsetReaderTimer.Enabled = false;
-            }
+
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -177,6 +177,35 @@ namespace _5Daddy.MSFramework
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+        bool ConnectionError = true;
+
+        private void ConnectionTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                var flightsim = FSUIPCReader.ConnectToFlightSim();
+                //FSUIPCReader.StartReading();
+                if (FSUIPCReader.isConnected)
+                {
+                    OffsetReaderTimer.Enabled = true;
+                }
+            }
+            catch (FSUIPCException ex)
+            {
+                Console.WriteLine(ex);
+                if (ex.FSUIPCErrorCode == FSUIPCError.FSUIPC_ERR_OPEN)
+                {
+                    OffsetReaderTimer.Enabled = true;
+                    ConnectionTimer.Stop();
+                }
+                else if (ConnectionError)
+                {
+                    
+                    MetroFramework.MetroMessageBox.Show(this, "Cannot connect to flightsim!\nMake sure you have your flightsim running and have FSUIPC installed!", "Uh Oh!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                ConnectionError = false;
+            }
         }
     }
 }
