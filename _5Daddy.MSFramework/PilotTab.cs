@@ -12,11 +12,11 @@ namespace _5Daddy.MSFramework
 {
     public partial class PilotTab : MetroFramework.Forms.MetroForm
     {
-        
+
         public PilotTab()
         {
             InitializeComponent();
-            pl_lb.Text = "Hello, " + Global.Username;
+            //pl_lb.Text = "Hello, " + Global.Username;
         }
 
         private void PilotTab_Load(object sender, EventArgs e)
@@ -25,7 +25,8 @@ namespace _5Daddy.MSFramework
             landingDatabase1.Hide();
         }
 
-        private void metroTile4_Click(object sender, EventArgs e)
+        private void metroTile4_Click(object sender, EventArgs
+            e)
         {
             page.Hide();
             landingDatabase1.Hide();

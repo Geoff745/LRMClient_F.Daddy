@@ -32,21 +32,20 @@
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile4 = new MetroFramework.Controls.MetroTile();
-            this.pl_lb = new System.Windows.Forms.Label();
-            this.metroTile5 = new MetroFramework.Controls.MetroTile();
-            this.page = new _5Daddy.MSFramework.LRM_Page();
             this.landingDatabase1 = new _5Daddy.MSFramework.LandingDatabase();
+            this.page = new _5Daddy.MSFramework.LRM_Page();
+            this.lrM_Page2 = new _5Daddy.MSFramework.LRM_Page();
             this.SuspendLayout();
             // 
             // metroTile1
             // 
             this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(198, 470);
-            this.metroTile1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile1.Location = new System.Drawing.Point(123, 304);
             this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(159, 89);
+            this.metroTile1.Size = new System.Drawing.Size(107, 58);
             this.metroTile1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile1.TabIndex = 2;
+            this.metroTile1.TabStop = false;
             this.metroTile1.Text = "Pilot Menu";
             this.metroTile1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroTile1.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -56,12 +55,12 @@
             // metroTile2
             // 
             this.metroTile2.ActiveControl = null;
-            this.metroTile2.Location = new System.Drawing.Point(365, 470);
-            this.metroTile2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile2.Location = new System.Drawing.Point(234, 304);
             this.metroTile2.Name = "metroTile2";
-            this.metroTile2.Size = new System.Drawing.Size(159, 89);
+            this.metroTile2.Size = new System.Drawing.Size(107, 58);
             this.metroTile2.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile2.TabIndex = 3;
+            this.metroTile2.TabStop = false;
             this.metroTile2.Text = "Air Traffic";
             this.metroTile2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroTile2.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -71,12 +70,12 @@
             // metroTile3
             // 
             this.metroTile3.ActiveControl = null;
-            this.metroTile3.Location = new System.Drawing.Point(532, 470);
-            this.metroTile3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile3.Location = new System.Drawing.Point(346, 304);
             this.metroTile3.Name = "metroTile3";
-            this.metroTile3.Size = new System.Drawing.Size(159, 89);
+            this.metroTile3.Size = new System.Drawing.Size(107, 58);
             this.metroTile3.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile3.TabIndex = 4;
+            this.metroTile3.TabStop = false;
             this.metroTile3.Text = "Log Book";
             this.metroTile3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroTile3.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -86,80 +85,62 @@
             // metroTile4
             // 
             this.metroTile4.ActiveControl = null;
-            this.metroTile4.Location = new System.Drawing.Point(866, 470);
-            this.metroTile4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile4.Location = new System.Drawing.Point(457, 304);
             this.metroTile4.Name = "metroTile4";
-            this.metroTile4.Size = new System.Drawing.Size(159, 89);
+            this.metroTile4.Size = new System.Drawing.Size(107, 58);
             this.metroTile4.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile4.TabIndex = 5;
+            this.metroTile4.TabStop = false;
             this.metroTile4.Text = "Settings";
             this.metroTile4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroTile4.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.metroTile4.UseSelectable = true;
             this.metroTile4.Click += new System.EventHandler(this.metroTile4_Click);
             // 
-            // pl_lb
+            // landingDatabase1
             // 
-            this.pl_lb.AutoSize = true;
-            this.pl_lb.Font = new System.Drawing.Font("Segoe UI Semilight", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pl_lb.Location = new System.Drawing.Point(4, 8);
-            this.pl_lb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pl_lb.Name = "pl_lb";
-            this.pl_lb.Size = new System.Drawing.Size(185, 74);
-            this.pl_lb.TabIndex = 6;
-            this.pl_lb.Text = "Hello, ";
-            // 
-            // metroTile5
-            // 
-            this.metroTile5.ActiveControl = null;
-            this.metroTile5.Location = new System.Drawing.Point(699, 470);
-            this.metroTile5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.metroTile5.Name = "metroTile5";
-            this.metroTile5.Size = new System.Drawing.Size(159, 89);
-            this.metroTile5.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTile5.TabIndex = 8;
-            this.metroTile5.Text = "Servers";
-            this.metroTile5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile5.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile5.UseSelectable = true;
+            this.landingDatabase1.BackColor = System.Drawing.Color.White;
+            this.landingDatabase1.Location = new System.Drawing.Point(-1, 39);
+            this.landingDatabase1.Margin = new System.Windows.Forms.Padding(2);
+            this.landingDatabase1.Name = "landingDatabase1";
+            this.landingDatabase1.Size = new System.Drawing.Size(708, 231);
+            this.landingDatabase1.TabIndex = 6;
             // 
             // page
             // 
-            this.page.BackColor = System.Drawing.SystemColors.Control;
-            this.page.Location = new System.Drawing.Point(-3, 95);
+            this.page.BackColor = System.Drawing.Color.White;
+            this.page.Location = new System.Drawing.Point(0, 23);
+            this.page.Margin = new System.Windows.Forms.Padding(2);
             this.page.Name = "page";
-            this.page.Size = new System.Drawing.Size(1062, 356);
-            this.page.TabIndex = 7;
+            this.page.Size = new System.Drawing.Size(708, 237);
+            this.page.TabIndex = 6;
             // 
-            // landingDatabase1
+            // lrM_Page2
             // 
-            this.landingDatabase1.Location = new System.Drawing.Point(-3, 95);
-            this.landingDatabase1.Name = "landingDatabase1";
-            this.landingDatabase1.Size = new System.Drawing.Size(1062, 356);
-            this.landingDatabase1.TabIndex = 9;
+            this.lrM_Page2.BackColor = System.Drawing.Color.White;
+            this.lrM_Page2.Location = new System.Drawing.Point(-1, 17);
+            this.lrM_Page2.Margin = new System.Windows.Forms.Padding(2);
+            this.lrM_Page2.Name = "lrM_Page2";
+            this.lrM_Page2.Size = new System.Drawing.Size(708, 271);
+            this.lrM_Page2.TabIndex = 7;
             // 
             // PilotTab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 566);
-            this.Controls.Add(this.landingDatabase1);
-            this.Controls.Add(this.metroTile5);
-            this.Controls.Add(this.page);
-            this.Controls.Add(this.pl_lb);
+            this.ClientSize = new System.Drawing.Size(706, 368);
+            this.Controls.Add(this.lrM_Page2);
             this.Controls.Add(this.metroTile4);
             this.Controls.Add(this.metroTile3);
             this.Controls.Add(this.metroTile2);
             this.Controls.Add(this.metroTile1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Controls.Add(this.landingDatabase1);
             this.Name = "PilotTab";
-            this.Padding = new System.Windows.Forms.Padding(30, 92, 30, 31);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Load += new System.EventHandler(this.PilotTab_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -169,9 +150,9 @@
         private MetroFramework.Controls.MetroTile metroTile2;
         private MetroFramework.Controls.MetroTile metroTile3;
         private MetroFramework.Controls.MetroTile metroTile4;
-        private System.Windows.Forms.Label pl_lb;
         private LRM_Page page;
-        private MetroFramework.Controls.MetroTile metroTile5;
         private LandingDatabase landingDatabase1;
+        private LRM_Page lrM_Page1;
+        private LRM_Page lrM_Page2;
     }
 }
