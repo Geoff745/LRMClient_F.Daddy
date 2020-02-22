@@ -35,5 +35,6 @@ namespace _5Daddy.MSFramework
         public const string Version = "1.0.0";
 
         public static string Username;
+        public static string landinglistsJsonPath = $"{Environment.CurrentDirectory}\\Landing.lrm";
     }
 }

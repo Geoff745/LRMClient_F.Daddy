@@ -42,9 +42,6 @@ namespace _5Daddy.MSFramework
         bool RptGround = false;
         private delegate void SafeCallDelegate();
         int i = 0;
-        bool Taken = false;
-        bool EndofRoute = false;
-        public static List<double[]> AltLS = new List<double[]>();
         private void UpdateForm(object sender, EventArgs e)
         {
             FSUIPCConnection.Process();
@@ -78,7 +75,7 @@ namespace _5Daddy.MSFramework
                 if (Pitch >= 0)
                     pitchS = Pitch.ToString();
                 else
-                    pitchS = Pitch.ToString();
+                    pitchS = Pitch.ToString() + "▼";
                 string bankS = "";
                 if (Bank != 0)
                 {
@@ -87,7 +84,7 @@ namespace _5Daddy.MSFramework
                     else
                         bankS = (Bank * -1).ToString();
                 }
-
+                
                 this.FPMBox.Text = VerticalSpeed.ToString();
                 this.PitchBox.Text = pitchS+" °";
                 this.BankBox.Text = bankS+ " °";
@@ -147,7 +144,6 @@ namespace _5Daddy.MSFramework
                     return;
                 }
                 RptGround = true;
-                
             }
             if (RptGround && !OnGround)
             {

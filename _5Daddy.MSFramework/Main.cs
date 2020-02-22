@@ -25,6 +25,8 @@ namespace _5Daddy.MSFramework
             InitializeComponent();
             Login_btn.Text = "Fetching..";
             FSUIPCReader e = new FSUIPCReader();
+            if (!File.Exists(Global.landinglistsJsonPath))
+                File.Create(Global.landinglistsJsonPath).Close();
         }
 
         private void Main_Load(object sender, EventArgs e)

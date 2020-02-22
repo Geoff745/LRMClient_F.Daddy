@@ -67,6 +67,12 @@
   <ItemGroup>
     <Compile Include="ConsoleDebug.cs" />
     <Compile Include="FSUIPC.cs" />
+    <Compile Include="LandingDatabase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LandingDatabase.Designer.cs">
+      <DependentUpon>LandingDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="LRM Page.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </Compile>
     <Compile Include="_5Daddy.Connection.cs" />
     <Compile Include="_5Daddy.Global.cs" />
+    <EmbeddedResource Include="LandingDatabase.resx">
+      <DependentUpon>LandingDatabase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LRM Page.resx">
       <DependentUpon>LRM Page.cs</DependentUpon>
     </EmbeddedResource>
