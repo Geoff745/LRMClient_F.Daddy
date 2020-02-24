@@ -14,6 +14,7 @@ namespace _5Daddy.MSFramework
 {
     public partial class LRM_Page : UserControl
     {
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer(_5Daddy.MSFramework.Properties.Resources.Notification);
         public LRM_Page()
         {
             InitializeComponent();
@@ -41,30 +42,12 @@ namespace _5Daddy.MSFramework
         int i = 0;
         bool Taken = false;
         bool EndofRoute = false;
-        public static List<double[]> AltLS = new List<double[]>();
         private void UpdateForm(object sender, EventArgs e)
         {
             FSUIPCConnection.Process();
             var OnGround = onGround.Value > 0 ? true : false;
-            if (OnGround)
-            {
-                if (Taken)
-                {
-                    EndofRoute = true;
-                }
-            }
-            else if (Taken == false)
-            {
-                Taken = true;
-            }
-            else if (EndofRoute && OnGround == false)
-            {
-                EndofRoute = true;
-            }
             if (!OnGround && !RptGround)
             {
-
-                AltLS.Add(new double[] { Alt.Value * 3.2808399 });
                 var Airspeed = (int)Math.Round(airspeed.Value / 128d);
                 double verticalSpeedMPS = verticalSpeed.Value / 256d;
                 double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
@@ -84,6 +67,8 @@ namespace _5Daddy.MSFramework
                     else
                         bankS = (Bank * -1).ToString();
                 }
+                else
+                    bankS = "0";
 
                 this.FPMBox.Text = VerticalSpeed.ToString();
                 this.PitchBox.Text = pitchS + " °";
@@ -144,7 +129,8 @@ namespace _5Daddy.MSFramework
                     return;
                 }
                 RptGround = true;
-
+                player.Play();
+                //landing card
             }
             if (RptGround && !OnGround)
             {
