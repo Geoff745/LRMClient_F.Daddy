@@ -55,7 +55,7 @@
             series1.Name = "Altitude";
             series1.YValuesPerPoint = 6;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1083, 366);
+            this.chart1.Size = new System.Drawing.Size(1083, 417);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -75,7 +75,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chart1);
             this.Name = "FlightStats";
-            this.Size = new System.Drawing.Size(1062, 355);
+            this.Size = new System.Drawing.Size(1062, 417);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
