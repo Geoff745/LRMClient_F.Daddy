@@ -90,7 +90,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirTraffic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AirTraffic.Designer.cs">
+      <DependentUpon>AirTraffic.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConsoleDebug.cs" />
+    <Compile Include="FlightStats.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlightStats.Designer.cs">
+      <DependentUpon>FlightStats.cs</DependentUpon>
+    </Compile>
     <Compile Include="FSUIPC.cs" />
     <Compile Include="LandingDatabase.cs">
       <SubType>UserControl</SubType>
@@ -119,8 +131,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="_5Daddy.Connection.cs" />
     <Compile Include="_5Daddy.Global.cs" />
+    <EmbeddedResource Include="AirTraffic.resx">
+      <DependentUpon>AirTraffic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlightStats.resx">
+      <DependentUpon>FlightStats.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LandingDatabase.resx">
       <DependentUpon>LandingDatabase.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,7 +165,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -157,6 +185,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Notification.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
