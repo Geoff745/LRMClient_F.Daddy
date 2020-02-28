@@ -33,7 +33,7 @@ namespace _5Daddy.MSFramework
         private void LRM_Page_Load(object sender, EventArgs e)
         {
             OffsetReaderTimer.Interval = Global.OffsetRefreshRate;
-            //ConnectionTimer.Start();
+            ConnectionTimer.Start();
             button1.BackColor = Color.FromArgb(255, 157, 0);
             button1.Text = "Searching... ";
         }
@@ -44,6 +44,7 @@ namespace _5Daddy.MSFramework
         bool EndofRoute = false;
         private void UpdateForm(object sender, EventArgs e)
         {
+
             FSUIPCConnection.Process();
             var OnGround = onGround.Value > 0 ? true : false;
             if (!OnGround && !RptGround)
@@ -162,7 +163,7 @@ namespace _5Daddy.MSFramework
 
         }
         bool ConnectionError = true;
-
+        bool CountUP = true;
         private void ConnectionTimer_Tick(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(255, 157, 0);
@@ -174,25 +175,30 @@ namespace _5Daddy.MSFramework
                 //FSUIPCReader.StartReading();
                 if (FSUIPCReader.isConnected)
                 {
+                    panel2.Visible = false;
+                    panel1.Visible = true;
                     OffsetReaderTimer.Enabled = true;
                 }
             }
             catch (FSUIPCException ex)
             {
+                
                 Console.WriteLine(ex);
                 if (ex.FSUIPCErrorCode == FSUIPCError.FSUIPC_ERR_OPEN)
                 {
                     OffsetReaderTimer.Enabled = true;
                     button1.BackColor = Color.FromArgb(235, 14, 14);
                     button1.Text = "Disconnect";
+                    panel2.Visible = false;
+                    panel1.Visible = true;
                     ConnectionTimer.Stop();
                 }
                 else if (ConnectionError)
                 {
-
+                    ConnectionError = false;
                     MetroFramework.MetroMessageBox.Show(this, "Cannot connect to flightsim!\nMake sure you have your flightsim running and have FSUIPC installed!", "Uh Oh!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                ConnectionError = false;
+                
             }
         }
 
@@ -204,7 +210,7 @@ namespace _5Daddy.MSFramework
                 button1.Text = "Connect";
                 OffsetReaderTimer.Stop();
             }
-            else
+            else if (button1.Text == "Connect")
             {
                 button1.BackColor = Color.FromArgb(255, 157, 0);
                 button1.Text = "Searching... ";

@@ -25,23 +25,26 @@ namespace _5Daddy.MSFramework
         Rectangle Base;
         int offsetx = 0;
         int prev = 0;
+
         private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (MovingControl)
             {
                 if (offsetx == 0)
                     offsetx = e.X;
-
+               
                 page.Location = new Point(page.Location.X + ((offsetx - e.X) * 5), page.Location.Y);
                 airTraffic1.Location = new Point(airTraffic1.Location.X + ((offsetx - e.X) * 5), airTraffic1.Location.Y);
                 landingDatabase1.Location = new Point(landingDatabase1.Location.X + ((offsetx - e.X) * 5), landingDatabase1.Location.Y);
                 settings1.Location = new Point(settings1.Location.X + ((offsetx - e.X) * 5), settings1.Location.Y);
                 offsetx = e.X;
             }
+
         }
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+
             Down = false;
             offsetx = 0;
             MovingControl = false;
@@ -50,12 +53,15 @@ namespace _5Daddy.MSFramework
             Point p3;
             Point p4;
             //move to closest box 
+            if (pictureBox1.Location.X > 0 || pictureBox1.Location.X > 336)
+                pictureBox1.Location = new Point(0, 0);
             if (r.IntersectsWith(new Rectangle(page.Location, page.Size)))
             {
                 p1 = new Point(Base.Location.X, Base.Location.Y);
                 p2 = new Point(Base.Location.X + Base.Width + 6, Base.Location.Y);
                 p3 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
                 p4 = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
+                pictureBox1.Location = new Point(0, 0);
             }
             else if (r.IntersectsWith(new Rectangle(airTraffic1.Location, airTraffic1.Size)))
             {
@@ -63,6 +69,7 @@ namespace _5Daddy.MSFramework
                 p2 = new Point(Base.Location.X, Base.Location.Y);
                 p3 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
                 p4 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+                pictureBox1.Location = new Point(112, 0);
             }
             else if (r.IntersectsWith(new Rectangle(landingDatabase1.Location, landingDatabase1.Size)))
             {
@@ -70,6 +77,7 @@ namespace _5Daddy.MSFramework
                 p2 = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
                 p3 = new Point(Base.Location.X, Base.Location.Y);
                 p4 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+                pictureBox1.Location = new Point(224, 0);
             }
             else if (r.IntersectsWith(new Rectangle(settings1.Location, settings1.Size)))
             {
@@ -77,6 +85,7 @@ namespace _5Daddy.MSFramework
                 p2 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
                 p3 = new Point(Base.Location.X - Base.Width, Base.Location.Y);
                 p4 = new Point(Base.Location.X, Base.Location.Y);
+                pictureBox1.Location = new Point(336, 0);
             }
             else
                 return;
@@ -240,42 +249,53 @@ namespace _5Daddy.MSFramework
         private void metroTile4_Click(object sender, EventArgs e)
         {
             CurrentControl = "Settings";
-            //page.Hide();
-            //airTraffic1.Hide();
-            //settings1.Show();
-            //landingDatabase1.Hide();
+            page.Location = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
+            airTraffic1.Location = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+            landingDatabase1.Location = new Point(Base.Location.X - Base.Width, Base.Location.Y);
+            settings1.Location = new Point(Base.Location.X, Base.Location.Y);
+            pictureBox1.Location = new Point(336, 0);
         }
 
         private void metroTile3_Click(object sender, EventArgs e)
         {
             CurrentControl = "Log Book";
-            //page.Hide();
-            //airTraffic1.Hide();
-            //settings1.Hide();
-            //landingDatabase1.Show();
+            page.Location = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+            airTraffic1.Location = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
+            landingDatabase1.Location = new Point(Base.Location.X, Base.Location.Y);
+            settings1.Location = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+            pictureBox1.Location = new Point(224, 0);
         }
 
         private void metroTile2_Click(object sender, EventArgs e)
         {
             CurrentControl = "Air Traffic";
-            //page.Hide();
-            //airTraffic1.Show();
-            //settings1.Hide();
-            //landingDatabase1.Hide();
+            page.Location = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
+            airTraffic1.Location = new Point(Base.Location.X, Base.Location.Y);
+            landingDatabase1.Location = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+            settings1.Location = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+            pictureBox1.Location = new Point(112, 0);
         }
 
         private void metroTile1_Click(object sender, EventArgs e)
         {
             CurrentControl = "Pilot Menu";
-            //page.Show();
-            //landingDatabase1.Hide();
+            page.Location = new Point(Base.Location.X, Base.Location.Y);
+            airTraffic1.Location = new Point(Base.Location.X + Base.Width + 6, Base.Location.Y);
+            landingDatabase1.Location = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+            settings1.Location = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
+            pictureBox1.Location = new Point(0, 0);
+
         }
-        
+
         string CurrentControl = "";
 
         private void landingDatabase1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
         }
     }
 }
