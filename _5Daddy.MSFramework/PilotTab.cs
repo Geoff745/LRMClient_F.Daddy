@@ -21,6 +21,7 @@ namespace _5Daddy.MSFramework
             this.Controls.Add(this.airTraffic1);
             this.Controls.Add(this.settings1);
             this.Controls.Add(this.page);
+            this.Controls.Add(this.lrmServers1);
             Static.Start();
             Message.Hide();
             //pl_lb.Text = "Hello, " + Global.Username;
@@ -61,6 +62,7 @@ namespace _5Daddy.MSFramework
             Point p2;
             Point p3;
             Point p4;
+            Point p5;
             //move to closest box 
             if (pictureBox1.Location.X > 0 || pictureBox1.Location.X > 336)
                 pictureBox1.Location = new Point(0, 0);
@@ -70,6 +72,7 @@ namespace _5Daddy.MSFramework
                 p2 = new Point(Base.Location.X + Base.Width + 6, Base.Location.Y);
                 p3 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
                 p4 = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
+                p5 = new Point(Base.Location.X + (Base.Width * 4) + 24, Base.Location.Y);
                 pictureBox1.Location = new Point(0, 0);
             }
             else if (r.IntersectsWith(new Rectangle(airTraffic1.Location, airTraffic1.Size)))
@@ -78,6 +81,7 @@ namespace _5Daddy.MSFramework
                 p2 = new Point(Base.Location.X, Base.Location.Y);
                 p3 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
                 p4 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+                p5 = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
                 pictureBox1.Location = new Point(112, 0);
             }
             else if (r.IntersectsWith(new Rectangle(landingDatabase1.Location, landingDatabase1.Size)))
@@ -86,14 +90,25 @@ namespace _5Daddy.MSFramework
                 p2 = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
                 p3 = new Point(Base.Location.X, Base.Location.Y);
                 p4 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+                p5 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
                 pictureBox1.Location = new Point(224, 0);
             }
-            else if (r.IntersectsWith(new Rectangle(settings1.Location, settings1.Size)))
+            else if (r.IntersectsWith(new Rectangle(lrmServers1.Location, lrmServers1.Size)))
             {
                 p1 = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
                 p2 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
                 p3 = new Point(Base.Location.X - Base.Width, Base.Location.Y);
                 p4 = new Point(Base.Location.X, Base.Location.Y);
+                p5 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+                pictureBox1.Location = new Point(224, 0);
+            }
+            else if (r.IntersectsWith(new Rectangle(settings1.Location, settings1.Size)))
+            {
+                p1 = new Point(Base.Location.X - (Base.Width * 4) - 24, Base.Location.Y);
+                p2 = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
+                p3 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+                p4 = new Point(Base.Location.X - Base.Width - 6, Base.Location.Y);
+                p5 = new Point(Base.Location.X, Base.Location.Y);
                 pictureBox1.Location = new Point(336, 0);
             }
             else
@@ -103,12 +118,13 @@ namespace _5Daddy.MSFramework
             {
                 if (!Down)
                 {
-                    if (p1.X != page.Location.X && p2.X != airTraffic1.Location.X && p3.X != landingDatabase1.Location.X && p4.X != settings1.Location.X)
+                    if (p1.X != page.Location.X && p2.X != airTraffic1.Location.X && p3.X != landingDatabase1.Location.X && p4.X != lrmServers1.Location.X && p5.X != settings1.Location.X)
                     {
                         page.Location = new Point((p1.X + page.Location.X) / 2, p1.Y);
                         airTraffic1.Location = new Point((p2.X + airTraffic1.Location.X) / 2, p2.Y);
                         landingDatabase1.Location = new Point((p3.X + landingDatabase1.Location.X) / 2, p3.Y);
-                        settings1.Location = new Point((p4.X + settings1.Location.X) / 2, p4.Y);
+                        lrmServers1.Location = new Point((p4.X + lrmServers1.Location.X) / 2, p4.Y);
+                        settings1.Location = new Point((p5.X + settings1.Location.X) / 2, p5.Y);
                     }
                     else
                     {
@@ -144,8 +160,10 @@ namespace _5Daddy.MSFramework
             pictureBox1.MouseMove += PictureBox1_MouseMove;
             airTraffic1.Location = new Point(page.Location.X + page.Width + 6, page.Location.Y);
             landingDatabase1.Location = new Point(page.Location.X + (page.Width * 2) + 12, page.Location.Y);
-            settings1.Location = new Point(page.Location.X + (page.Width * 3) + 18, page.Location.Y);
+            lrmServers1.Location = new Point(page.Location.X + (page.Width * 3) + 18, page.Location.Y);
+            settings1.Location = new Point(page.Location.X + (page.Width * 4) + 24, page.Location.Y);
             page.Show();
+            lrmServers1.Show();
             airTraffic1.Show();
             settings1.Show();
             landingDatabase1.Show();
@@ -157,7 +175,7 @@ namespace _5Daddy.MSFramework
             Settings,
             LandingDatabase
         }
-        private void MoveToPage(Point p1, Point p2, Point p3, Point p4)
+        private void MoveToPage(Point p1, Point p2, Point p3, Point p4, Point p5)
         {
             Down = false;
             EventHandler h = null;
@@ -165,12 +183,13 @@ namespace _5Daddy.MSFramework
             {
                 if (!Down)
                 {
-                    if (p1.X != page.Location.X && p2.X != airTraffic1.Location.X && p3.X != landingDatabase1.Location.X && p4.X != settings1.Location.X)
+                    if (p1.X != page.Location.X && p2.X != airTraffic1.Location.X && p3.X != landingDatabase1.Location.X && p4.X != lrmServers1.Location.X && p5.X != settings1.Location.X)
                     {
                         page.Location = new Point((p1.X + page.Location.X) / 2, p1.Y);
                         airTraffic1.Location = new Point((p2.X + airTraffic1.Location.X) / 2, p2.Y);
                         landingDatabase1.Location = new Point((p3.X + landingDatabase1.Location.X) / 2, p3.Y);
-                        settings1.Location = new Point((p4.X + settings1.Location.X) / 2, p4.Y);
+                        lrmServers1.Location = new Point((p4.X + lrmServers1.Location.X) / 2, p4.Y);
+                        settings1.Location = new Point((p5.X + settings1.Location.X) / 2, p5.Y);
                     }
                     else
                     {
@@ -195,13 +214,15 @@ namespace _5Daddy.MSFramework
             Point p2;
             Point p3;
             Point p4;
+            Point p5;
             CurrentControl = "Settings";
-            p1 = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
-            p2 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
-            p3 = new Point(Base.Location.X - Base.Width, Base.Location.Y);
-            p4 = new Point(Base.Location.X, Base.Location.Y);
+            p1 = new Point(Base.Location.X - (Base.Width * 4) - 24, Base.Location.Y);
+            p2 = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
+            p3 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+            p4 = new Point(Base.Location.X - Base.Width - 6, Base.Location.Y);
+            p5 = new Point(Base.Location.X, Base.Location.Y);
             pictureBox1.Location = new Point(336, 0);
-            MoveToPage(p1, p2, p3, p4);
+            MoveToPage(p1, p2, p3, p4, p5);
         }
 
         private void metroTile3_Click(object sender, EventArgs e)
@@ -211,13 +232,15 @@ namespace _5Daddy.MSFramework
             Point p2;
             Point p3;
             Point p4;
+            Point p5;
             CurrentControl = "Log Book";
             p1 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
             p2 = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
             p3 = new Point(Base.Location.X, Base.Location.Y);
             p4 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+            p5 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
             pictureBox1.Location = new Point(224, 0);
-            MoveToPage(p1, p2, p3, p4);
+            MoveToPage(p1, p2, p3, p4, p5);
         }
 
         private void metroTile2_Click(object sender, EventArgs e)
@@ -227,29 +250,33 @@ namespace _5Daddy.MSFramework
             Point p2;
             Point p3;
             Point p4;
+            Point p5;
             CurrentControl = "Air Traffic";
             p1 = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
             p2 = new Point(Base.Location.X, Base.Location.Y);
             p3 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
             p4 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+            p5 = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
             pictureBox1.Location = new Point(112, 0);
-            MoveToPage(p1, p2, p3, p4);
+            MoveToPage(p1, p2, p3, p4, p5);
         }
 
         private void metroTile1_Click(object sender, EventArgs e)
-        {
+        {//
             Down = true;
             Point p1;
             Point p2;
             Point p3;
             Point p4;
-            CurrentControl = "Pilot Menu";
+            Point p5;
+            CurrentControl = "LRMPage";
             p1 = new Point(Base.Location.X, Base.Location.Y);
             p2 = new Point(Base.Location.X + Base.Width + 6, Base.Location.Y);
             p3 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
             p4 = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
-            pictureBox1.Location = new Point(0, 0);
-            MoveToPage(p1, p2, p3, p4);
+            p5 = new Point(Base.Location.X + (Base.Width * 4) + 24, Base.Location.Y);
+            pictureBox1.Location = new Point(336, 0);
+            MoveToPage(p1, p2, p3, p4, p5);
         }
 
         string CurrentControl = "";
@@ -265,7 +292,20 @@ namespace _5Daddy.MSFramework
 
         private void metroTile5_Click(object sender, EventArgs e)
         {
-
+            Down = true;
+            Point p1;
+            Point p2;
+            Point p3;
+            Point p4;
+            Point p5;
+            CurrentControl = "Servers";
+            p1 = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
+            p2 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+            p3 = new Point(Base.Location.X - Base.Width, Base.Location.Y);
+            p4 = new Point(Base.Location.X, Base.Location.Y);
+            p5 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+            pictureBox1.Location = new Point(336, 0);
+            MoveToPage(p1, p2, p3, p4, p5);
         }
 
         private void timer2_Tick(object sender, EventArgs e)

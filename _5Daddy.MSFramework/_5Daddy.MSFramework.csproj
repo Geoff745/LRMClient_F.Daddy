@@ -116,6 +116,12 @@
     <Compile Include="LRM Page.Designer.cs">
       <DependentUpon>LRM Page.cs</DependentUpon>
     </Compile>
+    <Compile Include="LRMServers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LRMServers.Designer.cs">
+      <DependentUpon>LRMServers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LRM Page.resx">
       <DependentUpon>LRM Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LRMServers.resx">
+      <DependentUpon>LRMServers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
