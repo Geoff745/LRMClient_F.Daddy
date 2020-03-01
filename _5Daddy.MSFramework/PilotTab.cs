@@ -16,8 +16,12 @@ namespace _5Daddy.MSFramework
         public PilotTab()
         {
             InitializeComponent();
+            this.Controls.Add(this.landingDatabase1);
+            this.Controls.Add(this.airTraffic1);
+            this.Controls.Add(this.settings1);
+            this.Controls.Add(this.page);
             //pl_lb.Text = "Hello, " + Global.Username;
-            
+
         }
         Dictionary<string, int> ControlPoints = new Dictionary<string, int>();
         bool MovingControl = false;
@@ -126,6 +130,7 @@ namespace _5Daddy.MSFramework
 
         private void PilotTab_Load(object sender, EventArgs e)
         {
+            
             landingDatabase1.Hide();
             r = new Rectangle((this.Width / 2) - 5, this.Height / 2, 10, 3);
             Base = new Rectangle(page.Location, page.Size);
@@ -147,144 +152,99 @@ namespace _5Daddy.MSFramework
             Settings,
             LandingDatabase
         }
-        private void MoveToPage(Pages Page)
+        private void MoveToPage(Point p1, Point p2, Point p3, Point p4)
         {
-            //Down = false;
-            //offsetx = 0;
-            //MovingControl = false;
-            //Pages currpage;
-            ////move to closest box 
-            //if (r.IntersectsWith(new Rectangle(page.Location, page.Size)))
-            //{
-            //    currpage = Pages.LRM;
-            //}
-            //else if (r.IntersectsWith(new Rectangle(airTraffic1.Location, airTraffic1.Size)))
-            //{
-            //    currpage = Pages.AirTraffic;
-            //}
-            //else if (r.IntersectsWith(new Rectangle(landingDatabase1.Location, landingDatabase1.Size)))
-            //{
-            //    currpage = Pages.LandingDatabase;
-            //}
-            //else if (r.IntersectsWith(new Rectangle(settings1.Location, settings1.Size)))
-            //{
-            //    currpage = Pages.Settings;
-            //}
-            //else
-            //    return;
-            //if (currpage == Page)
-            //    return;
-
-            //Control destControl = null;
-            //Control currControl = null;
-            //switch (Page)
-            //{
-            //    case Pages.AirTraffic:
-            //        destControl = airTraffic1;
-            //        break;
-            //    case Pages.LandingDatabase:
-            //        destControl = landingDatabase1;
-            //        break;
-            //    case Pages.LRM:
-            //        destControl = page;
-            //        break;
-            //    case Pages.Settings:
-            //        destControl = settings1;
-            //        break;
-            //}
-
-            //switch (currpage)
-            //{
-            //    case Pages.AirTraffic:
-            //        currControl = airTraffic1;
-            //        break;
-            //    case Pages.LandingDatabase:
-            //        currControl = landingDatabase1;
-            //        break;
-            //    case Pages.LRM:
-            //        currControl = page;
-            //        break;
-            //    case Pages.Settings:
-            //        currControl = settings1;
-            //        break;
-            //}
-
-            //if (destControl == null)
-            //    return;
-
-            //int destx = destControl.Location.X;
-            //int currx = currControl.Location.X;
-            //bool left = false;
-            //if (destx < currx)
-            //    left = true;
-
-            //EventHandler h = null;
-            //h = (object s, EventArgs ev) =>
-            //{
-            //    if (!Down)
-            //    {
-            //        if (destx != currx)
-            //        {
-            //            page.Location = new Point((destx + page.Location.X) / 2, p1.Y);
-            //            airTraffic1.Location = new Point((p2.X + airTraffic1.Location.X) / 2, p2.Y);
-            //            landingDatabase1.Location = new Point((p3.X + landingDatabase1.Location.X) / 2, p3.Y);
-            //            settings1.Location = new Point((p4.X + settings1.Location.X) / 2, p4.Y);
-            //        }
-            //        else
-            //        {
-            //            timer1.Enabled = false;
-            //            timer1.Tick -= h;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        timer1.Enabled = false;
-            //        timer1.Tick -= h;
-            //    }
-            //};
-            //timer1.Tick += h;
-            //timer1.Enabled = true;
+            Down = false;
+            EventHandler h = null;
+            h = (object s, EventArgs ev) =>
+            {
+                if (!Down)
+                {
+                    if (p1.X != page.Location.X && p2.X != airTraffic1.Location.X && p3.X != landingDatabase1.Location.X && p4.X != settings1.Location.X)
+                    {
+                        page.Location = new Point((p1.X + page.Location.X) / 2, p1.Y);
+                        airTraffic1.Location = new Point((p2.X + airTraffic1.Location.X) / 2, p2.Y);
+                        landingDatabase1.Location = new Point((p3.X + landingDatabase1.Location.X) / 2, p3.Y);
+                        settings1.Location = new Point((p4.X + settings1.Location.X) / 2, p4.Y);
+                    }
+                    else
+                    {
+                        timer1.Enabled = false;
+                        timer1.Tick -= h;
+                    }
+                }
+                else
+                {
+                    timer1.Enabled = false;
+                    timer1.Tick -= h;
+                }
+            };
+            timer1.Tick += h;
+            timer1.Enabled = true;
         }
 
         private void metroTile4_Click(object sender, EventArgs e)
         {
+            Down = true;
+            Point p1;
+            Point p2;
+            Point p3;
+            Point p4;
             CurrentControl = "Settings";
-            page.Location = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
-            airTraffic1.Location = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
-            landingDatabase1.Location = new Point(Base.Location.X - Base.Width, Base.Location.Y);
-            settings1.Location = new Point(Base.Location.X, Base.Location.Y);
+            p1 = new Point(Base.Location.X - (Base.Width * 3) - 18, Base.Location.Y);
+            p2 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+            p3 = new Point(Base.Location.X - Base.Width, Base.Location.Y);
+            p4 = new Point(Base.Location.X, Base.Location.Y);
             pictureBox1.Location = new Point(336, 0);
+            MoveToPage(p1, p2, p3, p4);
         }
 
         private void metroTile3_Click(object sender, EventArgs e)
         {
+            Down = true;
+            Point p1;
+            Point p2;
+            Point p3;
+            Point p4;
             CurrentControl = "Log Book";
-            page.Location = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
-            airTraffic1.Location = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
-            landingDatabase1.Location = new Point(Base.Location.X, Base.Location.Y);
-            settings1.Location = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+            p1 = new Point(Base.Location.X - (Base.Width * 2) - 12, Base.Location.Y);
+            p2 = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
+            p3 = new Point(Base.Location.X, Base.Location.Y);
+            p4 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
             pictureBox1.Location = new Point(224, 0);
+            MoveToPage(p1, p2, p3, p4);
         }
 
         private void metroTile2_Click(object sender, EventArgs e)
         {
+            Down = true;
+            Point p1;
+            Point p2;
+            Point p3;
+            Point p4;
             CurrentControl = "Air Traffic";
-            page.Location = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
-            airTraffic1.Location = new Point(Base.Location.X, Base.Location.Y);
-            landingDatabase1.Location = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
-            settings1.Location = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+            p1 = new Point((Base.Location.X - Base.Width) - 6, Base.Location.Y);
+            p2 = new Point(Base.Location.X, Base.Location.Y);
+            p3 = new Point(Base.Location.X + (Base.Width) + 6, Base.Location.Y);
+            p4 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
             pictureBox1.Location = new Point(112, 0);
+            MoveToPage(p1, p2, p3, p4);
         }
 
         private void metroTile1_Click(object sender, EventArgs e)
         {
+            Down = true;
+            Point p1;
+            Point p2;
+            Point p3;
+            Point p4;
             CurrentControl = "Pilot Menu";
-            page.Location = new Point(Base.Location.X, Base.Location.Y);
-            airTraffic1.Location = new Point(Base.Location.X + Base.Width + 6, Base.Location.Y);
-            landingDatabase1.Location = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
-            settings1.Location = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
+            p1 = new Point(Base.Location.X, Base.Location.Y);
+            p2 = new Point(Base.Location.X + Base.Width + 6, Base.Location.Y);
+            p3 = new Point(Base.Location.X + (Base.Width * 2) + 12, Base.Location.Y);
+            p4 = new Point(Base.Location.X + (Base.Width * 3) + 18, Base.Location.Y);
             pictureBox1.Location = new Point(0, 0);
-
+            MoveToPage(p1, p2, p3, p4);
         }
 
         string CurrentControl = "";
@@ -296,6 +256,11 @@ namespace _5Daddy.MSFramework
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+        }
+
+        private void metroTile5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
