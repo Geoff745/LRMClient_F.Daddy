@@ -14,7 +14,6 @@ namespace _5Daddy.MSFramework
 {
     public partial class LRM_Page : UserControl
     {
-        System.Media.SoundPlayer player = new System.Media.SoundPlayer(_5Daddy.MSFramework.Properties.Resources.Notification);
         public LRM_Page()
         {
             InitializeComponent();
@@ -29,6 +28,8 @@ namespace _5Daddy.MSFramework
         private Offset<string> aircraftID = new Offset<string>(0x313C, 12);
         private Offset<int> roll = new Offset<int>(0x057C);
         private Offset<long> Alt = new Offset<long>(0x0574);
+        private Offset<string> messageWrite = new Offset<string>("message", 0x3380, 128, true);
+        private Offset<short> messageDuration = new Offset<short>("message", 0x32FA, true);
 
         private void LRM_Page_Load(object sender, EventArgs e)
         {
@@ -37,11 +38,10 @@ namespace _5Daddy.MSFramework
             button1.BackColor = Color.FromArgb(255, 157, 0);
             button1.Text = "Searching... ";
         }
-        bool RptGround = false;
+        bool RptGround = true;
         private delegate void SafeCallDelegate();
         int i = 0;
         bool Taken = false;
-        bool EndofRoute = false;
         private void UpdateForm(object sender, EventArgs e)
         {
 
@@ -76,7 +76,7 @@ namespace _5Daddy.MSFramework
                 this.BankBox.Text = bankS + " °";
                 this.SpeedBox.Text = Airspeed.ToString() + " Knots";
             }
-            if (EndofRoute && OnGround && !RptGround)
+            if (OnGround && !RptGround)
             {
                 WeatherServices ws = FSUIPCConnection.WeatherServices;
                 FsWeather weather = ws.GetWeatherAtAircraft();
@@ -92,46 +92,44 @@ namespace _5Daddy.MSFramework
                 if (fpm <= -1500)
                 {
                     ScoreBox.Text = "DEAD!";
-                    return;
                 }
-                if (fpm <= -700)
+                else if (fpm <= -700)
                 {
                     ScoreBox.Text = "1/10!";
-                    return;
                 }
-                if (fpm <= -500)
+                else if(fpm <= -500)
                 {
                     ScoreBox.Text = "Need repair!";
-                    return;
                 }
-                if (fpm <= -300)
+                else if(fpm <= -300)
                 {
                     ScoreBox.Text = "Ouch!";
-                    return;
                 }
-                if (fpm <= -200)
+                else if(fpm <= -200)
                 {
                     ScoreBox.Text = "Harsh!";
-                    return;
                 }
-                if (fpm <= -175)
+                else if(fpm <= -175)
                 {
                     ScoreBox.Text = "Nice!";
-                    return;
                 }
-                if (fpm <= -100)
+                else if(fpm <= -100)
                 {
                     ScoreBox.Text = "Smooth!";
-                    return;
                 }
-                if (fpm <= -50)
+                else if(fpm <= -50)
                 {
                     ScoreBox.Text = "Butter!";
-                    return;
                 }
                 RptGround = true;
-                player.Play();
-                //landing card
+                string Message = ScoreBox.Text+" "+ FPMBox.Text+ " Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + " Winds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees");
+                this.messageWrite.Value = Message;
+                this.messageDuration.Value = 10;
+                FSUIPCConnection.Process("message");
+                PilotTab.show = true;
+                Notify.TitleText = ScoreBox.Text;
+                Notify.DescText = "Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + "\nWinds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees")+"\nFPM "+ FPMBox.Text;
+                timer2.Start();
             }
             if (RptGround && !OnGround)
             {
@@ -148,6 +146,7 @@ namespace _5Daddy.MSFramework
             }
             GC.Collect();
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
 

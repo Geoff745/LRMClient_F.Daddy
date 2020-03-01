@@ -123,6 +123,12 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="MasterServer.cs" />
+    <Compile Include="Notify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Notify.Designer.cs">
+      <DependentUpon>Notify.cs</DependentUpon>
+    </Compile>
     <Compile Include="PilotTab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notify.resx">
+      <DependentUpon>Notify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PilotTab.resx">
       <DependentUpon>PilotTab.cs</DependentUpon>

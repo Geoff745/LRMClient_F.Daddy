@@ -34,9 +34,7 @@
             this.SpeedLabel = new System.Windows.Forms.Label();
             this.WindHeadingLabel = new System.Windows.Forms.Label();
             this.WindSpeedLabel = new System.Windows.Forms.Label();
-            this.FPMBox = new System.Windows.Forms.TextBox();
             this.FPMLabel = new System.Windows.Forms.Label();
-            this.ScoreBox = new System.Windows.Forms.TextBox();
             this.ScoreLabel = new System.Windows.Forms.Label();
             this.OffsetReaderTimer = new System.Windows.Forms.Timer(this.components);
             this.PitchBox = new System.Windows.Forms.Label();
@@ -48,9 +46,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ScoreBox = new System.Windows.Forms.Label();
+            this.FPMBox = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.label1 = new System.Windows.Forms.Label();
+            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -110,42 +111,22 @@
             this.WindSpeedLabel.TabIndex = 10;
             this.WindSpeedLabel.Text = "Wind Speed";
             // 
-            // FPMBox
-            // 
-            this.FPMBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
-            this.FPMBox.Location = new System.Drawing.Point(564, 18);
-            this.FPMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.FPMBox.Name = "FPMBox";
-            this.FPMBox.ReadOnly = true;
-            this.FPMBox.Size = new System.Drawing.Size(127, 39);
-            this.FPMBox.TabIndex = 12;
-            // 
             // FPMLabel
             // 
             this.FPMLabel.AutoSize = true;
             this.FPMLabel.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
-            this.FPMLabel.Location = new System.Drawing.Point(469, 21);
+            this.FPMLabel.Location = new System.Drawing.Point(435, 15);
             this.FPMLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.FPMLabel.Name = "FPMLabel";
             this.FPMLabel.Size = new System.Drawing.Size(62, 31);
             this.FPMLabel.TabIndex = 13;
             this.FPMLabel.Text = "FPM";
             // 
-            // ScoreBox
-            // 
-            this.ScoreBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
-            this.ScoreBox.Location = new System.Drawing.Point(564, 65);
-            this.ScoreBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ScoreBox.Name = "ScoreBox";
-            this.ScoreBox.ReadOnly = true;
-            this.ScoreBox.Size = new System.Drawing.Size(109, 39);
-            this.ScoreBox.TabIndex = 14;
-            // 
             // ScoreLabel
             // 
             this.ScoreLabel.AutoSize = true;
             this.ScoreLabel.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
-            this.ScoreLabel.Location = new System.Drawing.Point(469, 68);
+            this.ScoreLabel.Location = new System.Drawing.Point(435, 53);
             this.ScoreLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ScoreLabel.Name = "ScoreLabel";
             this.ScoreLabel.Size = new System.Drawing.Size(76, 31);
@@ -162,9 +143,9 @@
             this.PitchBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
             this.PitchBox.Location = new System.Drawing.Point(259, 15);
             this.PitchBox.Name = "PitchBox";
-            this.PitchBox.Size = new System.Drawing.Size(24, 31);
+            this.PitchBox.Size = new System.Drawing.Size(44, 31);
             this.PitchBox.TabIndex = 26;
-            this.PitchBox.Text = "°";
+            this.PitchBox.Text = "0 °";
             // 
             // BankBox
             // 
@@ -172,9 +153,9 @@
             this.BankBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
             this.BankBox.Location = new System.Drawing.Point(259, 53);
             this.BankBox.Name = "BankBox";
-            this.BankBox.Size = new System.Drawing.Size(24, 31);
+            this.BankBox.Size = new System.Drawing.Size(44, 31);
             this.BankBox.TabIndex = 27;
-            this.BankBox.Text = "°";
+            this.BankBox.Text = "0 °";
             // 
             // SpeedBox
             // 
@@ -182,9 +163,9 @@
             this.SpeedBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
             this.SpeedBox.Location = new System.Drawing.Point(259, 91);
             this.SpeedBox.Name = "SpeedBox";
-            this.SpeedBox.Size = new System.Drawing.Size(73, 31);
+            this.SpeedBox.Size = new System.Drawing.Size(93, 31);
             this.SpeedBox.TabIndex = 28;
-            this.SpeedBox.Text = "knots";
+            this.SpeedBox.Text = "0 knots";
             // 
             // WindSpeedBox
             // 
@@ -192,9 +173,10 @@
             this.WindSpeedBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
             this.WindSpeedBox.Location = new System.Drawing.Point(259, 129);
             this.WindSpeedBox.Name = "WindSpeedBox";
-            this.WindSpeedBox.Size = new System.Drawing.Size(73, 31);
+            this.WindSpeedBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.WindSpeedBox.Size = new System.Drawing.Size(93, 31);
             this.WindSpeedBox.TabIndex = 29;
-            this.WindSpeedBox.Text = "knots";
+            this.WindSpeedBox.Text = "0 knots";
             // 
             // WindHeadingBox
             // 
@@ -202,9 +184,9 @@
             this.WindHeadingBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
             this.WindHeadingBox.Location = new System.Drawing.Point(259, 167);
             this.WindHeadingBox.Name = "WindHeadingBox";
-            this.WindHeadingBox.Size = new System.Drawing.Size(24, 31);
+            this.WindHeadingBox.Size = new System.Drawing.Size(44, 31);
             this.WindHeadingBox.TabIndex = 30;
-            this.WindHeadingBox.Text = "°";
+            this.WindHeadingBox.Text = "0 °";
             // 
             // ConnectionTimer
             // 
@@ -213,12 +195,13 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(157)))), ((int)(((byte)(0)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 15F);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(15, 210);
+            this.button1.Location = new System.Drawing.Point(512, 203);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 52);
             this.button1.TabIndex = 31;
@@ -228,6 +211,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ScoreBox);
+            this.panel1.Controls.Add(this.FPMBox);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.SpeedBox);
             this.panel1.Controls.Add(this.PitchLabel);
@@ -239,15 +224,33 @@
             this.panel1.Controls.Add(this.BankBox);
             this.panel1.Controls.Add(this.WindHeadingLabel);
             this.panel1.Controls.Add(this.PitchBox);
-            this.panel1.Controls.Add(this.FPMBox);
             this.panel1.Controls.Add(this.ScoreLabel);
             this.panel1.Controls.Add(this.FPMLabel);
-            this.panel1.Controls.Add(this.ScoreBox);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(698, 271);
             this.panel1.TabIndex = 32;
             this.panel1.Visible = false;
+            // 
+            // ScoreBox
+            // 
+            this.ScoreBox.AutoSize = true;
+            this.ScoreBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
+            this.ScoreBox.Location = new System.Drawing.Point(558, 53);
+            this.ScoreBox.Name = "ScoreBox";
+            this.ScoreBox.Size = new System.Drawing.Size(72, 31);
+            this.ScoreBox.TabIndex = 33;
+            this.ScoreBox.Text = "Blank";
+            // 
+            // FPMBox
+            // 
+            this.FPMBox.AutoSize = true;
+            this.FPMBox.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 17.75F);
+            this.FPMBox.Location = new System.Drawing.Point(558, 15);
+            this.FPMBox.Name = "FPMBox";
+            this.FPMBox.Size = new System.Drawing.Size(27, 31);
+            this.FPMBox.TabIndex = 32;
+            this.FPMBox.Text = "0";
             // 
             // panel2
             // 
@@ -257,6 +260,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(708, 271);
             this.panel2.TabIndex = 33;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(244, 210);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(275, 28);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Looking for Flight Simulator";
             // 
             // metroProgressSpinner1
             // 
@@ -270,24 +283,14 @@
             this.metroProgressSpinner1.TabIndex = 0;
             this.metroProgressSpinner1.UseSelectable = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(244, 210);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(275, 28);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Looking for Flight Simulator";
-            // 
             // LRM_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.panel2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LRM_Page";
             this.Size = new System.Drawing.Size(708, 271);
             this.Load += new System.EventHandler(this.LRM_Page_Load);
@@ -306,9 +309,7 @@
         private System.Windows.Forms.Label SpeedLabel;
         private System.Windows.Forms.Label WindHeadingLabel;
         private System.Windows.Forms.Label WindSpeedLabel;
-        private System.Windows.Forms.TextBox FPMBox;
         private System.Windows.Forms.Label FPMLabel;
-        private System.Windows.Forms.TextBox ScoreBox;
         private System.Windows.Forms.Label ScoreLabel;
         public System.Windows.Forms.Timer OffsetReaderTimer;
         private System.Windows.Forms.Label PitchBox;
@@ -323,5 +324,8 @@
         private System.Windows.Forms.Panel panel2;
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ScoreBox;
+        private System.Windows.Forms.Label FPMBox;
+        private System.Windows.Forms.Timer timer2;
     }
 }

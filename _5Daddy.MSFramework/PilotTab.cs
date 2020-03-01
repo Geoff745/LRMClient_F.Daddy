@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
+using System.Reflection;
 namespace _5Daddy.MSFramework
 {
     public partial class PilotTab : MetroFramework.Forms.MetroForm
     {
-
+        bool Down = false;
         public PilotTab()
         {
             InitializeComponent();
@@ -20,6 +21,8 @@ namespace _5Daddy.MSFramework
             this.Controls.Add(this.airTraffic1);
             this.Controls.Add(this.settings1);
             this.Controls.Add(this.page);
+            Static.Start();
+            Message.Hide();
             //pl_lb.Text = "Hello, " + Global.Username;
 
         }
@@ -45,7 +48,9 @@ namespace _5Daddy.MSFramework
             }
 
         }
+        
 
+       
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
 
@@ -120,7 +125,7 @@ namespace _5Daddy.MSFramework
             timer1.Tick += h;
             timer1.Enabled = true;
         }
-        bool Down = false;
+
         private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             Down = true;
@@ -261,6 +266,36 @@ namespace _5Daddy.MSFramework
         private void metroTile5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+        }
+        public static bool show = false;
+        public static bool reset = false;
+        private void Static_Tick(object sender, EventArgs e)
+        {
+            if(show)
+            { 
+                Message.Show();
+                if (Message.Location.Y < -1)
+                {
+                    Message.Location = new Point(0, Message.Location.Y + 15 );
+                }
+                else
+                {
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
+                    player.Play();
+                    show = false;
+                }
+            }
+            if (reset)
+            {
+                Message.Location = new Point(0, -162);
+                Message.Hide();
+                reset = false;
+            }
         }
     }
 }
