@@ -40,8 +40,11 @@ namespace _5Daddy.MSFramework
         }
         bool RptGround = true;
         private delegate void SafeCallDelegate();
-        int i = 0;
-        bool Taken = false;
+        private void NextLR_Tick(object sender, EventArgs e)
+        {
+            NextLR.Stop();
+            OffsetReaderTimer.Start();
+        }
         private void UpdateForm(object sender, EventArgs e)
         {
 
@@ -129,7 +132,8 @@ namespace _5Daddy.MSFramework
                 PilotTab.show = true;
                 Notify.TitleText = ScoreBox.Text;
                 Notify.DescText = "Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + "\nWinds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees")+"\nFPM "+ FPMBox.Text;
-                timer2.Start();
+                NextLR.Start();
+                OffsetReaderTimer.Stop();
             }
             if (RptGround && !OnGround)
             {
@@ -216,5 +220,6 @@ namespace _5Daddy.MSFramework
                 ConnectionTimer.Start();
             }
         }
+
     }
 }

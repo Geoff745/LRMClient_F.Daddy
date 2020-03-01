@@ -43,7 +43,6 @@
             this.WindSpeedBox = new System.Windows.Forms.Label();
             this.WindHeadingBox = new System.Windows.Forms.Label();
             this.ConnectionTimer = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ScoreBox = new System.Windows.Forms.Label();
@@ -51,7 +50,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.NextLR = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -283,6 +282,11 @@
             this.metroProgressSpinner1.TabIndex = 0;
             this.metroProgressSpinner1.UseSelectable = true;
             // 
+            // NextLR
+            // 
+            this.NextLR.Interval = 60000;
+            this.NextLR.Tick += new System.EventHandler(this.NextLR_Tick);
+            // 
             // LRM_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,7 +322,6 @@
         private System.Windows.Forms.Label WindSpeedBox;
         private System.Windows.Forms.Label WindHeadingBox;
         private System.Windows.Forms.Timer ConnectionTimer;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
@@ -326,6 +329,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label ScoreBox;
         private System.Windows.Forms.Label FPMBox;
-        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer NextLR;
     }
 }

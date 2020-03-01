@@ -34,11 +34,12 @@
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile4 = new MetroFramework.Controls.MetroTile();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.metroTile5 = new MetroFramework.Controls.MetroTile();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Static = new System.Windows.Forms.Timer(this.components);
+            this.NextLR = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Message = new _5Daddy.MSFramework.Notify();
             this.page = new _5Daddy.MSFramework.LRM_Page();
             this.landingDatabase1 = new _5Daddy.MSFramework.LandingDatabase();
@@ -120,10 +121,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 5;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
@@ -160,6 +157,11 @@
             // 
             this.Static.Enabled = true;
             this.Static.Tick += new System.EventHandler(this.Static_Tick);
+            // 
+            // NextLR
+            // 
+            this.NextLR.Interval = 60000;
+            this.NextLR.Tick += new System.EventHandler(this.NextLR_Tick);
             // 
             // Message
             // 
@@ -239,12 +241,13 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private Settings settings1;
         private AirTraffic airTraffic1;
-        private System.Windows.Forms.Timer timer1;
         private LRM_Page page;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroTile metroTile5;
         private Notify Message;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Timer Static;
+        private System.Windows.Forms.Timer NextLR;
+        private System.Windows.Forms.Timer timer1;
     }
 }

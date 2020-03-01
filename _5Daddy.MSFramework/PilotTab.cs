@@ -288,6 +288,7 @@ namespace _5Daddy.MSFramework
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
                     player.Play();
                     show = false;
+                    NextLR.Start();
                 }
             }
             if (reset)
@@ -297,5 +298,11 @@ namespace _5Daddy.MSFramework
                 reset = false;
             }
         }
+        private void NextLR_Tick(object sender, EventArgs e)
+        {
+            NextLR.Stop();
+            reset = true;
+        }
+
     }
 }
