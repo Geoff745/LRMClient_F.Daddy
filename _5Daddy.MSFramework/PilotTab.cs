@@ -304,5 +304,9 @@ namespace _5Daddy.MSFramework
             reset = true;
         }
 
+        private void Closed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
