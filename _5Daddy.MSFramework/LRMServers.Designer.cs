@@ -156,7 +156,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "LRMServers";
+
             this.Size = new System.Drawing.Size(1062, 417);
             this.Load += new System.EventHandler(this.LRMServers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
