@@ -33,14 +33,16 @@ namespace _5Daddy.MSFramework
         private void Main_Load(object sender, EventArgs e)
         {
            
-            if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
+            if (File.Exists(Environment.CurrentDirectory + @"\Settings.json" ))
             {
-                var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
-                if (Reg != null)
-                {
-                    Console.WriteLine(Reg);
-                    LoginViaDiscord(Reg.ToString());
-                }
+                dynamic Settings = JObject.Parse(File.ReadAllText(Environment.CurrentDirectory + @"\Settings.json"));
+                Global.UserSettings.AutoLogin = Settings.AutoLogin;
+                Global.UserSettings.CacheDiscord = Settings.CacheDiscord;
+                Global.UserSettings.MobileAlerts = Settings.MobileAlerts;
+                Global.UserSettings.Multiplayer = Settings.Multiplayer;
+                Global.UserSettings.RemoteFlight = Settings.RemoteFlight;
+                Global.UserSettings.Sounds = Settings.Sounds;
+                Global.UserSettings.VASupport = Settings.VASupport;
             }
             
             New_Client UI_Client = new New_Client()
@@ -65,6 +67,22 @@ namespace _5Daddy.MSFramework
                 Login_btn.Text = "Unavailable";
                 //MessageBox.Show("The core online functions are not available", "Offline Mode", MessageBoxButtons.OK);
             }
+            try
+            {
+                if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
+                {
+                    var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
+                    if (Reg != null)
+                    {
+                        Console.WriteLine(Reg);
+                        LoginViaDiscord(Reg.ToString());
+                    }
+                }
+            } catch 
+            {
+
+            }
+
         }
 
         private void LoginViaDiscord(string OAuthCommand=null)
@@ -72,7 +90,7 @@ namespace _5Daddy.MSFramework
             //login with discord
             try
             {
-                if (OAuthCommand == null | Global.UserSettings.CacheDiscord)
+                if (OAuthCommand == null && Global.UserSettings.CacheDiscord)
                 {
                     HttpListener l = new HttpListener();
                     l.Prefixes.Add("http://localhost:8080/oauth/");
@@ -122,20 +140,8 @@ namespace _5Daddy.MSFramework
                     pl.Show();
                     this.Hide();
                 }
-                if (OAuthCommand != null | Global.UserSettings.CacheDiscord)
+                if (OAuthCommand != null && Global.UserSettings.CacheDiscord)
                 {
-                    HttpListener l = new HttpListener();
-                    l.Prefixes.Add("http://localhost:8080/oauth/");
-                    l.Start();
-                    Process.Start("https://discordapp.com/api/oauth2/authorize?client_id=602365472905756691&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Foauth%2F&response_type=code&scope=identify");
-
-                    HttpListenerContext context = l.GetContext();
-                    HttpListenerRequest request = context.Request;
-                    string id = request.QueryString["code"];
-                    Validate_User data = new Validate_User()
-                    {
-                        code = id
-                    };
                     ValidateResponcePacket Responce = new ValidateResponcePacket(JsonConvert.DeserializeObject<RawPacket>(OAuthCommand));
 
 
@@ -150,17 +156,10 @@ namespace _5Daddy.MSFramework
                         Global.AuthToken = Auth;
                         Global.LoggedIn = true;
                     }
-                    HttpListenerResponse _1response = context.Response;
                     OfflineMode = false;
                     PilotTab pl = new PilotTab();
                     pl.Show();
                     this.Hide();
-                    Stream dummyS = _1response.OutputStream;
-                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes($"<h1 style=\"color: #5e9ca0;\"><span style=\"color: #000000;\">Thank you, {Discordusername} you have been Authenticated! you can close this window</span></h1><p><span style=\"color: #000000;\" > ps.Thanks for using the LRM :D </span></p><p> &nbsp;</p>");
-                    _1response.ContentLength64 = buffer.Length;
-                    dummyS.Write(buffer, 0, buffer.Length);
-                    l.Stop();
-                    l.Close();
                 }
 
             }
@@ -186,6 +185,19 @@ namespace _5Daddy.MSFramework
         private void OffsetReaderTimer_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void Main_shown(object sender, EventArgs e)
+        {
+            if (Global.UserSettings.AutoLogin)
+            {
+                var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
+                Console.WriteLine(Reg);
+                if (Reg != null)
+                {
+                    LoginViaDiscord(Reg.ToString());
+                }
+            }
         }
     }
 }

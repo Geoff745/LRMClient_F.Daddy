@@ -47,106 +47,110 @@ namespace _5Daddy.MSFramework
         }
         private void UpdateForm(object sender, EventArgs e)
         {
-
-            FSUIPCConnection.Process();
-            var OnGround = onGround.Value > 0 ? true : false;
-            if (!OnGround && !RptGround)
+            try
             {
-                var Airspeed = (int)Math.Round(airspeed.Value / 128d);
-                double verticalSpeedMPS = verticalSpeed.Value / 256d;
-                double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
-                var VerticalSpeed = (int)verticalSpeedFPM;
-                var Bank = (int)((double)roll.Value * 360 / 4294967296);
-                var Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
-                string pitchS = "";
-                if (Pitch >= 0)
-                    pitchS = Pitch.ToString();
-                else
-                    pitchS = Pitch.ToString();
-                string bankS = "";
-                if (Bank != 0)
+                FSUIPCConnection.Process();
+                var OnGround = onGround.Value > 0 ? true : false;
+                if (!OnGround && !RptGround)
                 {
-                    if (Bank > 0)
-                        bankS = Bank.ToString();
+                    var Airspeed = (int)Math.Round(airspeed.Value / 128d);
+                    double verticalSpeedMPS = verticalSpeed.Value / 256d;
+                    double verticalSpeedFPM = verticalSpeedMPS * 60d * 3.28084d;
+                    var VerticalSpeed = (int)verticalSpeedFPM;
+                    var Bank = (int)((double)roll.Value * 360 / 4294967296);
+                    var Pitch = (int)((double)pitch.Value * 360 / 4294967296 * -1);
+                    string pitchS = "";
+                    if (Pitch >= 0)
+                        pitchS = Pitch.ToString();
                     else
-                        bankS = (Bank * -1).ToString();
-                }
-                else
-                    bankS = "0";
+                        pitchS = Pitch.ToString();
+                    string bankS = "";
+                    if (Bank != 0)
+                    {
+                        if (Bank > 0)
+                            bankS = Bank.ToString();
+                        else
+                            bankS = (Bank * -1).ToString();
+                    }
+                    else
+                        bankS = "0";
 
-                this.FPMBox.Text = VerticalSpeed.ToString();
-                this.PitchBox.Text = pitchS + " °";
-                this.BankBox.Text = bankS + " °";
-                this.SpeedBox.Text = Airspeed.ToString() + " Knots";
-            }
-            if (OnGround && !RptGround)
-            {
-                WeatherServices ws = FSUIPCConnection.WeatherServices;
-                FsWeather weather = ws.GetWeatherAtAircraft();
-                FsWindLayer windLayer = weather.WindLayers[0];
-                var WindSpeed = (int)windLayer.SpeedKnots;
-                var WindHeading = (int)windLayer.Direction;
-                this.WindSpeedBox.Text = WindSpeed.ToString() + " Knots";
-                this.WindHeadingBox.Text = WindHeading.ToString() + " °";
+                    this.FPMBox.Text = VerticalSpeed.ToString();
+                    this.PitchBox.Text = pitchS + " °";
+                    this.BankBox.Text = bankS + " °";
+                    this.SpeedBox.Text = Airspeed.ToString() + " Knots";
+                }
+                if (OnGround && !RptGround)
+                {
+                    WeatherServices ws = FSUIPCConnection.WeatherServices;
+                    FsWeather weather = ws.GetWeatherAtAircraft();
+                    FsWindLayer windLayer = weather.WindLayers[0];
+                    var WindSpeed = (int)windLayer.SpeedKnots;
+                    var WindHeading = (int)windLayer.Direction;
+                    this.WindSpeedBox.Text = WindSpeed.ToString() + " Knots";
+                    this.WindHeadingBox.Text = WindHeading.ToString() + " °";
 
 
-                //new landing
-                int fpm = Convert.ToInt32(this.FPMBox.Text);
-                if (fpm <= -1500)
-                {
-                    ScoreBox.Text = "DEAD!";
+                    //new landing
+                    int fpm = Convert.ToInt32(this.FPMBox.Text);
+                    if (fpm <= -1500)
+                    {
+                        ScoreBox.Text = "DEAD!";
+                    }
+                    else if (fpm <= -700)
+                    {
+                        ScoreBox.Text = "1/10!";
+                    }
+                    else if(fpm <= -500)
+                    {
+                        ScoreBox.Text = "Need repair!";
+                    }
+                    else if(fpm <= -300)
+                    {
+                        ScoreBox.Text = "Ouch!";
+                    }
+                    else if(fpm <= -200)
+                    {
+                        ScoreBox.Text = "Harsh!";
+                    }
+                    else if(fpm <= -175)
+                    {
+                        ScoreBox.Text = "Nice!";
+                    }
+                    else if(fpm <= -100)
+                    {
+                        ScoreBox.Text = "Smooth!";
+                    }
+                    else if(fpm <= 0)
+                    {
+                        ScoreBox.Text = "Butter!";
+                    }
+                    RptGround = true;
+                    string Message = ScoreBox.Text+" "+ FPMBox.Text+ " Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + " Winds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees");
+                    this.messageWrite.Value = Message;
+                    this.messageDuration.Value = 10;
+                    FSUIPCConnection.Process("message");
+                    PilotTab.show = true;
+                    Notify.TitleText = ScoreBox.Text;
+                    Notify.DescText = "Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + "\nWinds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees")+"\nFPM "+ FPMBox.Text;
+                    NextLR.Start();
+                    OffsetReaderTimer.Stop();
                 }
-                else if (fpm <= -700)
+                if (RptGround && !OnGround)
                 {
-                    ScoreBox.Text = "1/10!";
+                    System.Timers.Timer tempTimer = new System.Timers.Timer()
+                    {
+                        Interval = Global.LandingTimeoutTime,
+                        AutoReset = false
+                    };
+                    tempTimer.Elapsed += (object s, ElapsedEventArgs el) =>
+                    {
+                        RptGround = false;
+                    };
+                    tempTimer.Start();
                 }
-                else if(fpm <= -500)
-                {
-                    ScoreBox.Text = "Need repair!";
-                }
-                else if(fpm <= -300)
-                {
-                    ScoreBox.Text = "Ouch!";
-                }
-                else if(fpm <= -200)
-                {
-                    ScoreBox.Text = "Harsh!";
-                }
-                else if(fpm <= -175)
-                {
-                    ScoreBox.Text = "Nice!";
-                }
-                else if(fpm <= -100)
-                {
-                    ScoreBox.Text = "Smooth!";
-                }
-                else if(fpm <= 0)
-                {
-                    ScoreBox.Text = "Butter!";
-                }
-                RptGround = true;
-                string Message = ScoreBox.Text+" "+ FPMBox.Text+ " Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + " Winds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees");
-                this.messageWrite.Value = Message;
-                this.messageDuration.Value = 10;
-                FSUIPCConnection.Process("message");
-                PilotTab.show = true;
-                Notify.TitleText = ScoreBox.Text;
-                Notify.DescText = "Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + "\nWinds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees")+"\nFPM "+ FPMBox.Text;
-                NextLR.Start();
-                OffsetReaderTimer.Stop();
-            }
-            if (RptGround && !OnGround)
-            {
-                System.Timers.Timer tempTimer = new System.Timers.Timer()
-                {
-                    Interval = Global.LandingTimeoutTime,
-                    AutoReset = false
-                };
-                tempTimer.Elapsed += (object s, ElapsedEventArgs el) =>
-                {
-                    RptGround = false;
-                };
-                tempTimer.Start();
+            } catch {
+                
             }
             GC.Collect();
         }

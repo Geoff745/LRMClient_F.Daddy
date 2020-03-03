@@ -51,7 +51,7 @@
             this.Dev_Mark.AutoSize = true;
             this.Dev_Mark.Location = new System.Drawing.Point(213, 405);
             this.Dev_Mark.Name = "Dev_Mark";
-            this.Dev_Mark.Size = new System.Drawing.Size(637, 38);
+            this.Dev_Mark.Size = new System.Drawing.Size(418, 25);
             this.Dev_Mark.TabIndex = 1;
             this.Dev_Mark.Text = "Developed By Quin#3017 and Mr. Coffee#4132";
             // 
@@ -102,6 +102,7 @@
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Shown += new System.EventHandler(this.Main_shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
