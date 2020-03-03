@@ -16,5 +16,10 @@ namespace _5Daddy.MSFramework
         {
             InitializeComponent();
         }
+
+        private void AirTraffic_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

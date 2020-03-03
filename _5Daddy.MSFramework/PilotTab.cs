@@ -325,8 +325,12 @@ namespace _5Daddy.MSFramework
                 }
                 else
                 {
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
-                    player.Play();
+                    if (Global.UserSettings.Sounds)
+                    {
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
+                        player.Play();
+                    }
+
                     show = false;
                     NextLR.Start();
                 }
@@ -344,5 +348,9 @@ namespace _5Daddy.MSFramework
             reset = true;
         }
 
+        private void Closed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace _5Daddy.MSFramework
 
         public static HttpClient Communcation = new HttpClient();
 
-        internal static Uri URI = new Uri("http://localhost:8081/");
+        internal static Uri URI = new Uri("http://82.0.172.129:8081/");
 
         public static Type PacketType { get; set; }
 
@@ -36,5 +36,22 @@ namespace _5Daddy.MSFramework
 
         public static string Username;
         public static string landinglistsJsonPath = $"{Environment.CurrentDirectory}\\Landing.lrm";
+
+        public class UserSettings
+        {
+            public static bool CacheDiscord = true;
+
+            public static bool AutoLogin = false;
+
+            public static bool VASupport = false;
+
+            public static bool MobileAlerts = false;
+
+            public static bool RemoteFlight = false;
+
+            public static bool Multiplayer = true;
+
+            public static bool Sounds = true;
+        }
     }
 }

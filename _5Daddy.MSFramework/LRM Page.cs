@@ -120,7 +120,7 @@ namespace _5Daddy.MSFramework
                 {
                     ScoreBox.Text = "Smooth!";
                 }
-                else if(fpm <= -50)
+                else if(fpm <= 0)
                 {
                     ScoreBox.Text = "Butter!";
                 }

@@ -37,9 +37,10 @@ namespace _5Daddy.MSFramework
             {
                 Header = p.Header;
                 Body = p.Body;
-                DiscordUsername = p.Body["Discord_Username"].ToString();
-                DiscordID = ulong.Parse(p.Body["Discord_ID"].ToString());
-                Auth = p.Body["Auth"].ToString();
+                foreach (var idgh in p.Body.Values.ToArray())
+                    Console.WriteLine(idgh);
+                DiscordUsername = p.Body.Values.ToArray()[0].ToString();
+                Auth = p.Body.Values.ToArray()[1].ToString();
                 AuthToken = Auth;
             }
         }
