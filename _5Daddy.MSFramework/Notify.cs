@@ -12,6 +12,7 @@ namespace _5Daddy.MSFramework
 {
     public partial class Notify : UserControl
     {
+        public static bool Promping = false;
         public Notify()
         {
             InitializeComponent();
@@ -33,6 +34,25 @@ namespace _5Daddy.MSFramework
         {
             Title.Text = TitleText;
             TextArea.Text = DescText;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (Promping)
+            {
+                Timer t = new Timer()
+                {
+                    Interval = 5,
+                };
+                t.Tick += (object s, EventArgs a) =>
+                {
+                    this.Location = new Point(Location.X, Location.Y - 1);
+                    if (Location.Y == Parent.Size.Height - 5)
+                    {
+                        t.Enabled = false;
+                    }
+                };
+            }
         }
     }
 }

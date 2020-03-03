@@ -47,7 +47,6 @@ namespace _5Daddy.MSFramework
         }
         private void UpdateForm(object sender, EventArgs e)
         {
-
             FSUIPCConnection.Process();
             var OnGround = onGround.Value > 0 ? true : false;
             if (!OnGround && !RptGround)
@@ -129,7 +128,8 @@ namespace _5Daddy.MSFramework
                 this.messageWrite.Value = Message;
                 this.messageDuration.Value = 10;
                 FSUIPCConnection.Process("message");
-                PilotTab.show = true;
+                var par = Parent as PilotTab;
+                par.PromptNotify();
                 Notify.TitleText = ScoreBox.Text;
                 Notify.DescText = "Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + "\nWinds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees")+"\nFPM "+ FPMBox.Text;
                 NextLR.Start();

@@ -25,13 +25,20 @@ namespace _5Daddy.MSFramework
         [STAThread]
         static void Main()
         {
-            if (!Environment.GetCommandLineArgs().ToArray().Contains("-Console"))
-            { 
-                ShowWindow(GetConsoleWindow(), 0); 
+            try
+            {
+                if (!Environment.GetCommandLineArgs().ToArray().Contains("-Console"))
+                {
+                    ShowWindow(GetConsoleWindow(), 0);
+                }
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Main());
             }
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            catch (Exception)
+            {
+                //handle error
+            }
         }
     }
 }
