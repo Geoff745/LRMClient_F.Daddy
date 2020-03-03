@@ -43,6 +43,7 @@
             this.metroToggle6 = new MetroFramework.Controls.MetroToggle();
             this.label8 = new System.Windows.Forms.Label();
             this.metroToggle7 = new MetroFramework.Controls.MetroToggle();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -120,8 +121,6 @@
             // metroToggle3
             // 
             this.metroToggle3.AutoSize = true;
-            this.metroToggle3.Checked = true;
-            this.metroToggle3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.metroToggle3.FontSize = MetroFramework.MetroLinkSize.Medium;
             this.metroToggle3.FontWeight = MetroFramework.MetroLinkWeight.Light;
             this.metroToggle3.Location = new System.Drawing.Point(239, 115);
@@ -129,7 +128,7 @@
             this.metroToggle3.Size = new System.Drawing.Size(80, 17);
             this.metroToggle3.Style = MetroFramework.MetroColorStyle.Green;
             this.metroToggle3.TabIndex = 5;
-            this.metroToggle3.Text = "On";
+            this.metroToggle3.Text = "Off";
             this.metroToggle3.UseSelectable = true;
             // 
             // label5
@@ -231,11 +230,29 @@
             this.metroToggle7.Text = "On";
             this.metroToggle7.UseSelectable = true;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(177)))), ((int)(((byte)(89)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 15F);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(548, 215);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 43);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "Apply";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.metroToggle7);
             this.Controls.Add(this.label7);
@@ -251,7 +268,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.metroToggle1);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Settings";
             this.Size = new System.Drawing.Size(708, 271);
             this.Load += new System.EventHandler(this.Settings_Load);
@@ -277,5 +294,6 @@
         private MetroFramework.Controls.MetroToggle metroToggle6;
         private System.Windows.Forms.Label label8;
         private MetroFramework.Controls.MetroToggle metroToggle7;
+        private System.Windows.Forms.Button button1;
     }
 }

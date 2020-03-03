@@ -325,8 +325,12 @@ namespace _5Daddy.MSFramework
                 }
                 else
                 {
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
-                    player.Play();
+                    if (Global.UserSettings.Sounds)
+                    {
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
+                        player.Play();
+                    }
+
                     show = false;
                     NextLR.Start();
                 }
