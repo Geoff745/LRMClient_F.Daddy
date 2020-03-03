@@ -36,16 +36,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.metroTile5 = new MetroFramework.Controls.MetroTile();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.Static = new System.Windows.Forms.Timer(this.components);
             this.NextLR = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.Message = new _5Daddy.MSFramework.Notify();
             this.page = new _5Daddy.MSFramework.LRM_Page();
             this.landingDatabase1 = new _5Daddy.MSFramework.LandingDatabase();
             this.airTraffic1 = new _5Daddy.MSFramework.AirTraffic();
             this.settings1 = new _5Daddy.MSFramework.Settings();
             this.lrmServers1 = new _5Daddy.MSFramework.LRMServers();
+            this.notify1 = new _5Daddy.MSFramework.Notify();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -151,34 +149,10 @@
             this.metroTile5.UseSelectable = true;
             this.metroTile5.Click += new System.EventHandler(this.metroTile5_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(177)))), ((int)(((byte)(89)))));
-            this.panel2.Location = new System.Drawing.Point(2, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(368, 8);
-            this.panel2.TabIndex = 16;
-            // 
-            // Static
-            // 
-            this.Static.Enabled = true;
-            this.Static.Tick += new System.EventHandler(this.Static_Tick);
-            // 
             // NextLR
             // 
             this.NextLR.Interval = 60000;
             this.NextLR.Tick += new System.EventHandler(this.NextLR_Tick);
-            // 
-            // Message
-            // 
-            this.Message.BackColor = System.Drawing.Color.White;
-            this.Message.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Message.Location = new System.Drawing.Point(0, -249);
-            this.Message.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.Message.Name = "Message";
-            this.Message.Size = new System.Drawing.Size(366, 248);
-            this.Message.TabIndex = 14;
             // 
             // page
             // 
@@ -209,6 +183,7 @@
             // 
             // settings1
             // 
+            this.settings1.BackColor = System.Drawing.Color.White;
             this.settings1.Location = new System.Drawing.Point(-2, 32);
             this.settings1.Margin = new System.Windows.Forms.Padding(2);
             this.settings1.Name = "settings1";
@@ -222,19 +197,28 @@
             this.lrmServers1.Size = new System.Drawing.Size(1062, 417);
             this.lrmServers1.TabIndex = 17;
             // 
+            // notify1
+            // 
+            this.notify1.BackColor = System.Drawing.Color.White;
+            this.notify1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.notify1.Location = new System.Drawing.Point(349, -213);
+            this.notify1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.notify1.Name = "notify1";
+            this.notify1.Size = new System.Drawing.Size(368, 249);
+            this.notify1.TabIndex = 14;
+            // 
             // PilotTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 566);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.notify1);
             this.Controls.Add(this.metroTile5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroTile4);
             this.Controls.Add(this.metroTile3);
             this.Controls.Add(this.metroTile2);
             this.Controls.Add(this.metroTile1);
-            this.Controls.Add(this.Message);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PilotTab";
             this.Padding = new System.Windows.Forms.Padding(30, 92, 30, 31);
@@ -262,11 +246,9 @@
         private LRM_Page page;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroTile metroTile5;
-        private Notify Message;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Timer Static;
         private System.Windows.Forms.Timer NextLR;
         private System.Windows.Forms.Timer timer1;
         private LRMServers lrmServers1;
+        private Notify notify1;
     }
 }

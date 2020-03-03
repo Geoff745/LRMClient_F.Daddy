@@ -22,8 +22,7 @@ namespace _5Daddy.MSFramework
             this.Controls.Add(this.settings1);
             this.Controls.Add(this.page);
             this.Controls.Add(this.lrmServers1);
-            Static.Start();
-            Message.Hide();
+            //Message.Hide();
             //pl_lb.Text = "Hello, " + Global.Username;
 
         }
@@ -32,8 +31,7 @@ namespace _5Daddy.MSFramework
         Rectangle r;
         Rectangle Base;
         int offsetx = 0;
-        int prev = 0;
-
+       
         private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (MovingControl)
@@ -314,33 +312,28 @@ namespace _5Daddy.MSFramework
         }
         public static bool show = false;
         public static bool reset = false;
-        private void Static_Tick(object sender, EventArgs e)
+        public void PromptNotify()
         {
-            if(show)
-            { 
-                Message.Show();
-                if (Message.Location.Y < -1)
-                {
-                    Message.Location = new Point(0, Message.Location.Y + 15 );
-                }
-                else
-                {
-                    if (Global.UserSettings.Sounds)
-                    {
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
-                        player.Play();
-                    }
-
-                    show = false;
-                    NextLR.Start();
-                }
-            }
-            if (reset)
+            notify1.Location = new Point(358, notify1.Size.Height + Size.Height);
+            notify1.Show();
+            if (Global.UserSettings.Sounds)
             {
-                Message.Location = new Point(0, -162);
-                Message.Hide();
-                reset = false;
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Notification);
+                player.Play();
             }
+            NextLR.Start();
+            //notify : 358, -217
+            Timer t = new Timer();
+            t.Interval = 10;
+            t.Tick += (object s, EventArgs e) =>
+            {
+                notify1.Location = new Point(358, notify1.Location.Y + -1);
+                if (notify1.Location.Y <= -217)
+                {
+                    t.Enabled = false;
+                    Notify.Promping = true;
+                }
+            };
         }
         private void NextLR_Tick(object sender, EventArgs e)
         {
