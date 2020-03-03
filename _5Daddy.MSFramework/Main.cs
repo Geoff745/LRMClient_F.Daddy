@@ -67,21 +67,7 @@ namespace _5Daddy.MSFramework
                 Login_btn.Text = "Unavailable";
                 //MessageBox.Show("The core online functions are not available", "Offline Mode", MessageBoxButtons.OK);
             }
-            try
-            {
-                if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
-                {
-                    var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
-                    if (Reg != null)
-                    {
-                        Console.WriteLine(Reg);
-                        LoginViaDiscord(Reg.ToString());
-                    }
-                }
-            } catch 
-            {
 
-            }
 
         }
 
@@ -189,14 +175,21 @@ namespace _5Daddy.MSFramework
 
         private void Main_shown(object sender, EventArgs e)
         {
-            if (Global.UserSettings.AutoLogin)
+            try
             {
-                var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
-                Console.WriteLine(Reg);
-                if (Reg != null)
+                if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
                 {
-                    LoginViaDiscord(Reg.ToString());
+                    var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
+                    if (Reg != null)
+                    {
+                        Console.WriteLine(Reg);
+                        LoginViaDiscord(Reg.ToString());
+                    }
                 }
+            }
+            catch
+            {
+
             }
         }
     }
