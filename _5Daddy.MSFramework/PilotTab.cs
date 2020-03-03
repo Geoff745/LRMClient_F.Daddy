@@ -22,7 +22,7 @@ namespace _5Daddy.MSFramework
             this.Controls.Add(this.settings1);
             this.Controls.Add(this.page);
             this.Controls.Add(this.lrmServers1);
-            //Message.Hide();
+            notify1.Hide();
             //pl_lb.Text = "Hello, " + Global.Username;
 
         }
@@ -327,13 +327,14 @@ namespace _5Daddy.MSFramework
             t.Interval = 10;
             t.Tick += (object s, EventArgs e) =>
             {
-                notify1.Location = new Point(358, notify1.Location.Y + -1);
+                notify1.Location = new Point(358, notify1.Location.Y + +1);
                 if (notify1.Location.Y <= -217)
                 {
                     t.Enabled = false;
                     Notify.Promping = true;
                 }
             };
+            t.Enabled = true;
         }
         private void NextLR_Tick(object sender, EventArgs e)
         {
