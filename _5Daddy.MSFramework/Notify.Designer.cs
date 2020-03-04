@@ -107,6 +107,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(179)))), ((int)(((byte)(81)))));
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(125, 217);
@@ -114,6 +115,7 @@
             this.label1.Size = new System.Drawing.Size(119, 32);
             this.label1.TabIndex = 21;
             this.label1.Text = "Landed!";
+            this.label1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Notify
             // 

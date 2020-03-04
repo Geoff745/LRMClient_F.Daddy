@@ -51,7 +51,8 @@ namespace _5Daddy.MSFramework
             };
             try
             {
-                RawPacket ParseJson = JsonConvert.DeserializeObject<RawPacket>(MasterServer.SendToMasterServer(GetRawPacket(UI_Client)).GetAwaiter().GetResult());
+                string res = MasterServer.SendToMasterServer(GetRawPacket(UI_Client)).GetAwaiter().GetResult();
+                RawPacket ParseJson = JsonConvert.DeserializeObject<RawPacket>(res);
                 if (ParseJson.Header == "Good_Version")
                 {
                     Login_btn.Text = "Login With Discord";
@@ -62,7 +63,7 @@ namespace _5Daddy.MSFramework
                     MessageBox.Show("The version " + UI_Client.Version + " Is out of date!\nPlease update to " + ParseJson.Body["Expected"], "Offline Mode", MessageBoxButtons.OK);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 Login_btn.Text = "Unavailable";
                 //MessageBox.Show("The core online functions are not available", "Offline Mode", MessageBoxButtons.OK);

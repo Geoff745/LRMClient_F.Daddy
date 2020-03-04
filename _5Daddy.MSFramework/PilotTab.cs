@@ -314,7 +314,7 @@ namespace _5Daddy.MSFramework
         public static bool reset = false;
         public void PromptNotify()
         {
-            notify1.Location = new Point(358, notify1.Size.Height + Size.Height);
+            notify1.Location = new Point(358, notify1.Size.Height * -1);
             notify1.Show();
             if (Global.UserSettings.Sounds)
             {
@@ -324,11 +324,12 @@ namespace _5Daddy.MSFramework
             NextLR.Start();
             //notify : 358, -217
             Timer t = new Timer();
-            t.Interval = 10;
+            t.Interval = 20;
+            int des = (notify1.Size.Height * -1) + 20;
             t.Tick += (object s, EventArgs e) =>
             {
                 notify1.Location = new Point(358, notify1.Location.Y + +1);
-                if (notify1.Location.Y <= -217)
+                if (notify1.Location.Y == des)
                 {
                     t.Enabled = false;
                     Notify.Promping = true;

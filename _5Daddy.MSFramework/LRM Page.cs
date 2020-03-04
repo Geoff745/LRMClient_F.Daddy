@@ -126,11 +126,12 @@ namespace _5Daddy.MSFramework
                         ScoreBox.Text = "Butter!";
                     }
                     RptGround = true;
-                    string Message = ScoreBox.Text+" "+ FPMBox.Text+ " Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + " Winds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees");
+                    string Message = "5Daddy LRM: " +ScoreBox.Text+" "+ FPMBox.Text+ " Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + " Winds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees");
                     this.messageWrite.Value = Message;
                     this.messageDuration.Value = 10;
                     FSUIPCConnection.Process("message");
-                    PilotTab.show = true;
+                    var par = this.Parent as PilotTab;
+                    par.PromptNotify();
                     Notify.TitleText = ScoreBox.Text;
                     Notify.DescText = "Landed at " + SpeedBox.Text + " " + PitchBox.Text.Replace("°", "degrees") + "\nWinds " + WindSpeedBox.Text + " at " + WindHeadingBox.Text.Replace("°", "degrees")+"\nFPM "+ FPMBox.Text;
                     NextLR.Start();

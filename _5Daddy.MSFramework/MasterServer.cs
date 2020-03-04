@@ -13,6 +13,9 @@ namespace _5Daddy.MSFramework
 {
     class MasterServer
     {
+        internal static Uri MasterServerAddress = new Uri("http://82.0.172.129:56798/");
+
+
         public async static Task<string> SendToMasterServer(IPacket data, int Timeout = 5000)
         {
             try
@@ -22,16 +25,16 @@ namespace _5Daddy.MSFramework
                 {
                     Content = new ByteArrayContent(Encoding.ASCII.GetBytes(json)),
                     Method = new HttpMethod("POST"),
-                    RequestUri = Global.URI,
+                    RequestUri = MasterServer.MasterServerAddress,
                 };
                 var ResponseMessage = Global.Communcation.SendAsync(RequestMessage).Result;
-                Console.WriteLine("POST > " + Global.URI.ToString().Replace("/", "").Remove(0, 5) + "\n    TX > " + json);
+                Console.WriteLine("POST > " + MasterServer.MasterServerAddress.ToString().Replace("/", "").Remove(0, 5) + "\n    TX > " + json);
                 Stream ReadSteam = await ResponseMessage.Content.ReadAsStreamAsync();
                 byte[] MaxBuffer = new byte[1024];
                 int ByteBuffer = ReadSteam.Read(MaxBuffer, 0, Convert.ToInt32(ReadSteam.Length));
                 byte[] DataBuffer = new byte[ByteBuffer];
                 Array.Copy(MaxBuffer, DataBuffer, ByteBuffer);
-                Console.WriteLine("POST > " + Global.URI.ToString().Replace("/", "").Remove(0, 5) + "\n    RX > " + Encoding.ASCII.GetString(DataBuffer));
+                Console.WriteLine("POST > " + MasterServer.MasterServerAddress.ToString().Replace("/", "").Remove(0, 5) + "\n    RX > " + Encoding.ASCII.GetString(DataBuffer));
                 return Encoding.ASCII.GetString(DataBuffer);
             }
             catch (SocketException ex)
