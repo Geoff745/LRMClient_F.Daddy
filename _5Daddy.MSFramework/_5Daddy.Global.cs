@@ -13,7 +13,7 @@ namespace _5Daddy.MSFramework
 
         public static HttpClient Communcation = new HttpClient();
 
-        internal static Uri URI = new Uri("http://localhost:8081");
+        internal static Uri URI = new Uri("http://82.0.172.129:3033");
 
         public static Type PacketType { get; set; }
 
