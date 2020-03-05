@@ -17,9 +17,11 @@ namespace _5Daddy.MSFramework
 
         public static string AuthToken { get; set; }
 
-        public static bool OfflineMode = false;
+        public static bool OfflineMode = true;
 
         public static bool LoggedIn = false;
+
+        public static FSUIPC.FlightSim ConnectedFlightsim { get;set; }
 
         //The time after you take off to start reading offsets again
         public static int LandingTimeoutTime = 4000;
@@ -33,6 +35,7 @@ namespace _5Daddy.MSFramework
         public const string Version = "1.0.0";
 
         public static string Username;
+
         public static string landinglistsJsonPath = $"{Environment.CurrentDirectory}\\Landing.lrm";
 
         public class UserSettings

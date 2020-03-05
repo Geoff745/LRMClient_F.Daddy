@@ -207,5 +207,11 @@
   <ItemGroup>
     <None Include="Resources\Notification.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Locked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unlocked.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

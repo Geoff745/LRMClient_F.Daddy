@@ -154,6 +154,10 @@
             this.NextLR.Interval = 60000;
             this.NextLR.Tick += new System.EventHandler(this.NextLR_Tick);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
+            // 
             // page
             // 
             this.page.BackColor = System.Drawing.Color.White;

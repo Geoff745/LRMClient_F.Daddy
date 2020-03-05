@@ -77,7 +77,7 @@ namespace _5Daddy.MSFramework
             //login with discord
             try
             {
-                if (OAuthCommand == null && Global.UserSettings.CacheDiscord)
+                if (OAuthCommand == null && !Global.UserSettings.CacheDiscord)
                 {
                     HttpListener l = new HttpListener();
                     l.Prefixes.Add("http://localhost:8080/oauth/");
@@ -176,22 +176,22 @@ namespace _5Daddy.MSFramework
 
         private void Main_shown(object sender, EventArgs e)
         {
-            try
-            {
-                if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
-                {
-                    var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
-                    if (Reg != null)
-                    {
-                        Console.WriteLine(Reg);
-                        LoginViaDiscord(Reg.ToString());
-                    }
-                }
-            }
-            catch
-            {
+            //try
+            //{
+            //    if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
+            //    {
+            //        var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
+            //        if (Reg != null)
+            //        {
+            //            Console.WriteLine(Reg);
+            //            LoginViaDiscord(Reg.ToString());
+            //        }
+            //    }
+            //}
+            //catch
+            //{
 
-            }
+            //}
         }
     }
 }

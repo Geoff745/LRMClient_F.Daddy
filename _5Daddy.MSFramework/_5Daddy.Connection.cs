@@ -37,11 +37,10 @@ namespace _5Daddy.MSFramework
             {
                 Header = p.Header;
                 Body = p.Body;
-                foreach (var idgh in p.Body.Values.ToArray())
-                    Console.WriteLine(idgh);
-                DiscordUsername = p.Body.Values.ToArray()[0].ToString();
-                Auth = p.Body.Values.ToArray()[1].ToString();
-                AuthToken = Auth;
+                Auth = p.Auth;
+                AuthToken = p.Body["AuthToken"].ToString();
+                DiscordUsername = p.Body["DiscordUsername"].ToString();
+                DiscordID = ulong.Parse(p.Body["DiscordID"].ToString());
             }
         }
         internal class Validate_User : IPacket
@@ -49,14 +48,29 @@ namespace _5Daddy.MSFramework
             public string Header { get; set; }
             public Dictionary<object, object> Body { get; set; }
             public string Auth { get; set; }
+
             public string code { get; set; }
         }
-
+        internal class Get_Servers : IPacket
+        {
+            public string Header { get; set; }
+            public Dictionary<object, object> Body { get; set; }
+            public string Auth { get; set; }
+        }
         internal class RawPacket : IPacket
         {
             public string Header { get; set; }
             public Dictionary<object, object> Body { get; set; }
             public string Auth { get; set; }
+        }
+        internal class LRMServers_List : IPacket
+        {
+            public string Header { get; set; }
+            public Dictionary<object, object> Body { get; set; }
+            public string Auth { get; set; }
+
+            public List<MasterServer.LRMServer> LRMServers { get; set; }
+            
         }
         public interface IPacket
         {

@@ -34,7 +34,7 @@ namespace _5Daddy.MSFramework
         private void LRM_Page_Load(object sender, EventArgs e)
         {
             OffsetReaderTimer.Interval = Global.OffsetRefreshRate;
-            ConnectionTimer.Start();
+            ConnectionTimer.Enabled = true;
             button1.BackColor = Color.FromArgb(255, 157, 0);
             button1.Text = "Searching... ";
         }
@@ -176,10 +176,9 @@ namespace _5Daddy.MSFramework
         {
             button1.BackColor = Color.FromArgb(255, 157, 0);
             button1.Text = "Searching... ";
-            ConnectionTimer.Start();
             try
             {
-                var flightsim = FSUIPCReader.ConnectToFlightSim();
+                Global.ConnectedFlightsim = FSUIPCReader.ConnectToFlightSim();
                 //FSUIPCReader.StartReading();
                 if (FSUIPCReader.isConnected)
                 {
