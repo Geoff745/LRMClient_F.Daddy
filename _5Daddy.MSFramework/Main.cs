@@ -157,7 +157,19 @@ namespace _5Daddy.MSFramework
 
         private void Login_btn_Click(object sender, EventArgs e)
         {
-            LoginViaDiscord();
+            try
+            {
+                var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
+                if (Reg != null)
+                {
+                    Console.WriteLine(Reg);
+                    LoginViaDiscord(Reg.ToString());
+                }
+            }
+            catch
+            {
+                Console.WriteLine("I Ofed");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -177,7 +189,7 @@ namespace _5Daddy.MSFramework
         {
             try
             {
-                if (Global.UserSettings.AutoLogin | Global.UserSettings.CacheDiscord)
+                if (Global.UserSettings.AutoLogin && Global.UserSettings.CacheDiscord)
                 {
                     var Reg = Registry.CurrentUser.OpenSubKey(@"5Daddy").GetValue("OAuth");
                     if (Reg != null)
@@ -185,6 +197,13 @@ namespace _5Daddy.MSFramework
                         Console.WriteLine(Reg);
                         LoginViaDiscord(Reg.ToString());
                     }
+                }
+                else if(Global.UserSettings.AutoLogin)
+                {
+                    Global.OfflineMode = true;
+                    PilotTab pl = new PilotTab();
+                    pl.Show();
+                    this.Hide();
                 }
             }
             catch

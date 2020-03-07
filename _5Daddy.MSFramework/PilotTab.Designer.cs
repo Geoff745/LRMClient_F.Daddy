@@ -44,6 +44,7 @@
             this.settings1 = new _5Daddy.MSFramework.Settings();
             this.lrmServers1 = new _5Daddy.MSFramework.LRMServers();
             this.notify1 = new _5Daddy.MSFramework.Notify();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,10 +52,9 @@
             // metroTile1
             // 
             this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(116, 475);
-            this.metroTile1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile1.Location = new System.Drawing.Point(77, 309);
             this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(160, 89);
+            this.metroTile1.Size = new System.Drawing.Size(107, 58);
             this.metroTile1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile1.TabIndex = 2;
             this.metroTile1.TabStop = false;
@@ -67,10 +67,9 @@
             // metroTile2
             // 
             this.metroTile2.ActiveControl = null;
-            this.metroTile2.Location = new System.Drawing.Point(284, 475);
-            this.metroTile2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile2.Location = new System.Drawing.Point(189, 309);
             this.metroTile2.Name = "metroTile2";
-            this.metroTile2.Size = new System.Drawing.Size(160, 89);
+            this.metroTile2.Size = new System.Drawing.Size(107, 58);
             this.metroTile2.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile2.TabIndex = 3;
             this.metroTile2.TabStop = false;
@@ -83,10 +82,9 @@
             // metroTile3
             // 
             this.metroTile3.ActiveControl = null;
-            this.metroTile3.Location = new System.Drawing.Point(452, 475);
-            this.metroTile3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile3.Location = new System.Drawing.Point(301, 309);
             this.metroTile3.Name = "metroTile3";
-            this.metroTile3.Size = new System.Drawing.Size(160, 89);
+            this.metroTile3.Size = new System.Drawing.Size(107, 58);
             this.metroTile3.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile3.TabIndex = 4;
             this.metroTile3.TabStop = false;
@@ -99,10 +97,9 @@
             // metroTile4
             // 
             this.metroTile4.ActiveControl = null;
-            this.metroTile4.Location = new System.Drawing.Point(789, 475);
-            this.metroTile4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile4.Location = new System.Drawing.Point(526, 309);
             this.metroTile4.Name = "metroTile4";
-            this.metroTile4.Size = new System.Drawing.Size(160, 89);
+            this.metroTile4.Size = new System.Drawing.Size(107, 58);
             this.metroTile4.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile4.TabIndex = 5;
             this.metroTile4.TabStop = false;
@@ -117,8 +114,9 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Gray;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(160, 26);
+            this.pictureBox1.Size = new System.Drawing.Size(107, 17);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -127,19 +125,17 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(116, 446);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Location = new System.Drawing.Point(77, 290);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(834, 18);
+            this.panel1.Size = new System.Drawing.Size(556, 12);
             this.panel1.TabIndex = 12;
             // 
             // metroTile5
             // 
             this.metroTile5.ActiveControl = null;
-            this.metroTile5.Location = new System.Drawing.Point(620, 475);
-            this.metroTile5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.metroTile5.Location = new System.Drawing.Point(413, 309);
             this.metroTile5.Name = "metroTile5";
-            this.metroTile5.Size = new System.Drawing.Size(160, 89);
+            this.metroTile5.Size = new System.Drawing.Size(107, 58);
             this.metroTile5.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTile5.TabIndex = 13;
             this.metroTile5.TabStop = false;
@@ -167,7 +163,7 @@
             // 
             this.landingDatabase1.BackColor = System.Drawing.Color.White;
             this.landingDatabase1.Location = new System.Drawing.Point(-2, 32);
-            this.landingDatabase1.Margin = new System.Windows.Forms.Padding(2);
+            this.landingDatabase1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.landingDatabase1.Name = "landingDatabase1";
             this.landingDatabase1.Size = new System.Drawing.Size(1062, 417);
             this.landingDatabase1.TabIndex = 6;
@@ -193,6 +189,7 @@
             // lrmServers1
             // 
             this.lrmServers1.Location = new System.Drawing.Point(-2, 32);
+            this.lrmServers1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lrmServers1.Name = "lrmServers1";
             this.lrmServers1.Size = new System.Drawing.Size(1062, 417);
             this.lrmServers1.TabIndex = 17;
@@ -201,17 +198,25 @@
             // 
             this.notify1.BackColor = System.Drawing.Color.White;
             this.notify1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.notify1.Location = new System.Drawing.Point(349, -213);
-            this.notify1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.notify1.Location = new System.Drawing.Point(233, -138);
             this.notify1.Name = "notify1";
-            this.notify1.Size = new System.Drawing.Size(368, 249);
+            this.notify1.Size = new System.Drawing.Size(246, 163);
             this.notify1.TabIndex = 14;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(177)))), ((int)(((byte)(89)))));
+            this.panel2.Location = new System.Drawing.Point(66, -77);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(454, 82);
+            this.panel2.TabIndex = 15;
             // 
             // PilotTab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 566);
+            this.ClientSize = new System.Drawing.Size(706, 368);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.notify1);
             this.Controls.Add(this.metroTile5);
             this.Controls.Add(this.panel1);
@@ -219,9 +224,7 @@
             this.Controls.Add(this.metroTile3);
             this.Controls.Add(this.metroTile2);
             this.Controls.Add(this.metroTile1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PilotTab";
-            this.Padding = new System.Windows.Forms.Padding(30, 92, 30, 31);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -250,5 +253,6 @@
         private System.Windows.Forms.Timer timer1;
         private LRMServers lrmServers1;
         private Notify notify1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
