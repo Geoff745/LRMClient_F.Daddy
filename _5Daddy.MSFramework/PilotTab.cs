@@ -43,6 +43,7 @@ namespace _5Daddy.MSFramework
                 airTraffic1.Location = new Point(airTraffic1.Location.X + ((offsetx - e.X) * 5), airTraffic1.Location.Y);
                 landingDatabase1.Location = new Point(landingDatabase1.Location.X + ((offsetx - e.X) * 5), landingDatabase1.Location.Y);
                 settings1.Location = new Point(settings1.Location.X + ((offsetx - e.X) * 5), settings1.Location.Y);
+                lrmServers1.Location = new Point(lrmServers1.Location.X + ((offsetx - e.X) * 5), lrmServers1.Location.Y);
                 offsetx = e.X;
             }
 
@@ -138,6 +139,7 @@ namespace _5Daddy.MSFramework
             };
             timer1.Tick += h;
             timer1.Enabled = true;
+            
         }
 
         private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -314,7 +316,7 @@ namespace _5Daddy.MSFramework
         public static bool reset = false;
         public void PromptNotify()
         {
-            notify1.Location = new Point(358, notify1.Size.Height + Size.Height);
+            notify1.Location = new Point(358, notify1.Size.Height * -1);
             notify1.Show();
             if (Global.UserSettings.Sounds)
             {
@@ -324,11 +326,12 @@ namespace _5Daddy.MSFramework
             NextLR.Start();
             //notify : 358, -217
             Timer t = new Timer();
-            t.Interval = 10;
+            t.Interval = 20;
+            int des = (notify1.Size.Height * -1) + 20;
             t.Tick += (object s, EventArgs e) =>
             {
                 notify1.Location = new Point(358, notify1.Location.Y + +1);
-                if (notify1.Location.Y <= -217)
+                if (notify1.Location.Y == des)
                 {
                     t.Enabled = false;
                     Notify.Promping = true;
